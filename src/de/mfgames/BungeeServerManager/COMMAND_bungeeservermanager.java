@@ -9,6 +9,10 @@
  * */
 package de.mfgames.BungeeServerManager;
 
+import java.io.IOException;
+
+import net.kronos.rkon.core.Rcon;
+import net.kronos.rkon.core.ex.AuthenticationException;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
@@ -71,7 +75,21 @@ public class COMMAND_bungeeservermanager extends Command {
 	 * */
 	private void executeCmd(CommandSender sender, String[] args) {
 		if (args.length >= 3) {
-			
+			String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + args[1] + ".addr");
+			int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + args[1] + ".port");
+			String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + args[1] + ".password");
+			try {
+				Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
+				String command = args[2];
+				for (int i = 3; i < args.length; i++) {
+					command += " " + args[i];
+				}
+				String result = rcon.command(command);
+				sender.sendMessage(new TextComponent("Server +\"" + args[1] + "\": " + result));
+			} catch (Exception e) {
+				e.printStackTrace();
+				sender.sendMessage(new TextComponent("§cAn error occured!"));
+			}
 		} else {
 			sender.sendMessage(new TextComponent("§c/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
 			showHelp(sender);
@@ -86,18 +104,43 @@ public class COMMAND_bungeeservermanager extends Command {
 		if (args.length == 2) {
 			switch (args[0]) {
 			case "start":
-				// Start <SERVER>
+				startServer(sender, args[1]);
 				break;
 			case "stop":
-				// Stop <SERVER>
+				stopServer(sender, args[1]);
 				break;
 			case "restart":
-				// Restart <SERVER>
+				startServer(sender, args[1]);
+				stopServer(sender, args[1]);
 				break;
 			default:
 				sender.sendMessage(new TextComponent("§c/bsm <start/stop/restart> <SERVER>"));
 				showHelp(sender);
 			}
+		}
+	}
+	
+	private void startServer(CommandSender sender, String servername) {
+		String startScript = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".startscript");
+		try {
+			Runtime.getRuntime().exec(startScript);
+		} catch (IOException e) {
+			e.printStackTrace();
+			sender.sendMessage(new TextComponent("§cAn error occured!"));
+		}
+	}
+	
+	private void stopServer(CommandSender sender, String servername) {
+		String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".addr");
+		int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + servername + ".port");
+		String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".password");
+		try {
+			Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
+			String result = rcon.command("stop");
+			sender.sendMessage(new TextComponent("Server +\"" + servername + "\": " + result + " (Stopping...)"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			sender.sendMessage(new TextComponent("§cAn error occured!"));
 		}
 	}
 	
