@@ -1,3 +1,12 @@
+/*
+ * BungeeServerManager v1.0
+ * 
+ * Copyright (C) 2019 TGamesTV
+ * Copyright (C) 2019 DavidoTek
+ * 
+ * Licensed under MIT
+ * 
+ * */
 package de.mfgames.BungeeServerManager;
 
 import net.md_5.bungee.api.CommandSender;
