@@ -25,8 +25,16 @@ public class COMMAND_bungeeservermanager extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		/* Check if sender has the permissions (print message and return if not) */
 		if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase())) {
-			sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
-			return;
+			/* Check if sender has server-specific permissions */
+			if (args.length >= 2) {
+				if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase() + args[1].toLowerCase())) {
+					sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+					return;
+				}
+			} else {
+				sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+				return;
+			}
 		}
 		
 		/* Check sub-command */
