@@ -3,7 +3,9 @@ servers:
     addr: 192.168.2.101
     port: 27015
     password: secure
+    startscript: ../Server1/start.bat
   server2:
     addr: 192.168.2.102
     port: 27015
     password: onetwothree
+    startscript: ../Server2/start.bat
