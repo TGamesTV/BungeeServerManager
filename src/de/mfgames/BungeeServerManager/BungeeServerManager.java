@@ -38,7 +38,6 @@ public class BungeeServerManager extends Plugin {
 	
 	public static String pver = "1.0";	/* Plugin Version */
 	
-	File f = new File(getDataFolder(), "config.yml");
 	Configuration configuration;
 	
 	@Override
@@ -81,7 +80,8 @@ public class BungeeServerManager extends Plugin {
                 Files.copy(in, file.toPath());
 	        }
 
-			configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(f);
+			configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
+			//configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File("C:\\Users\\David\\Desktop\\config.yml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

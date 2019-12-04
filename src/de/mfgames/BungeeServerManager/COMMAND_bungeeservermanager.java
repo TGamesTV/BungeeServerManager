@@ -24,16 +24,18 @@ public class COMMAND_bungeeservermanager extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		/* Check if sender has the permissions (print message and return if not) */
-		if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase())) {
-			/* Check if sender has server-specific permissions */
-			if (args.length >= 2) {
-				if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase() + args[1].toLowerCase())) {
+		if (args.length > 0) {
+			if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase())) {
+				/* Check if sender has server-specific permissions */
+				if (args.length >= 2) {
+					if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase() + args[1].toLowerCase())) {
+						sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+						return;
+					}
+				} else {
 					sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
 					return;
 				}
-			} else {
-				sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
-				return;
 			}
 		}
 		
@@ -67,13 +69,13 @@ public class COMMAND_bungeeservermanager extends Command {
 	 * Shows help
 	 * */
 	private void showHelp(CommandSender sender) {
-		sender.sendMessage(new TextComponent("§6 ==== BUNGEE SERVER MANAGER " + BungeeServerManager.pver + " ==== "));
-		sender.sendMessage(new TextComponent("§6§l/bsm help$r§6 - Shows this"));
-		sender.sendMessage(new TextComponent("§6§l/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]$r§6 - Execute command on server"));
-		sender.sendMessage(new TextComponent("§6§l/bsm start <SERVER>$r§6 - Start the given server"));
-		sender.sendMessage(new TextComponent("§6§l/bsm stop <SERVER>$r§6 - Stop the given server"));
-		sender.sendMessage(new TextComponent("§6§l/bsm restart <SERVER>$r§6 - Restart the given server"));
-		sender.sendMessage(new TextComponent("§6§l/bsm reload$r§6 - Reloads the plugin/configuration"));
+		sender.sendMessage(new TextComponent("§6§l ==== BUNGEE SERVER MANAGER " + BungeeServerManager.pver + " ==== "));
+		sender.sendMessage(new TextComponent("§6/bsm help§r - Shows this"));
+		sender.sendMessage(new TextComponent("§6/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]§r - Execute command"));
+		sender.sendMessage(new TextComponent("§6/bsm start <SERVER>§r - Start the given server"));
+		sender.sendMessage(new TextComponent("§6/bsm stop <SERVER>§r - Stop the given server"));
+		sender.sendMessage(new TextComponent("§6/bsm restart <SERVER>§r - Restart the given server"));
+		sender.sendMessage(new TextComponent("§6/bsm reload§r - Reloads the plugin/configuration"));
 	}
 	
 	/*
@@ -157,5 +159,6 @@ public class COMMAND_bungeeservermanager extends Command {
 	 */
 	private void reloadPlugin(CommandSender sender) {
 		BungeeServerManager.getInstance().loadConfiguration();
+		sender.sendMessage(new TextComponent("§aConfiguration reloaded"));
 	}
 }
