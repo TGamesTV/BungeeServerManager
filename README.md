@@ -1,1 +1,3 @@
 # BungeeServerManager
+
+* Deutsch *
