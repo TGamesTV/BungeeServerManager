@@ -1,0 +1,9 @@
+servers:
+  server1:
+    addr: 192.168.2.101
+    port: 27015
+    password: secure
+  server2:
+    addr: 192.168.2.102
+    port: 27015
+    password: onetwothree
