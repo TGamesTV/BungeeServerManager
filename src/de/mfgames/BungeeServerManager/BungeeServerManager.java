@@ -19,12 +19,11 @@ public class BungeeServerManager extends Plugin {
 	@Override
 	public void onEnable() {
 		registerCommands();
-		System.out.println("[BungeeServerManager] BungeeServerManager enabled.");
 	}
 	
 	@Override
 	public void onDisable() {
-		System.out.println("[BungeeServerManager] Plugin disabled.");
+		
 	}
 	
 	public void registerCommands() {
