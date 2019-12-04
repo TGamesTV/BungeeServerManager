@@ -1,0 +1,8 @@
+name: BungeeServerManager
+version: 1.0
+authors: [TGamesTV, DavidoTek]
+main: de.mfgames.BungeeServerManager.BungeeServerManager
+
+commands:
+  bungeeservermanager:
+    aliases: [bsm]
