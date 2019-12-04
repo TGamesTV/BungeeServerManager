@@ -12,7 +12,6 @@ package de.mfgames.BungeeServerManager;
 import java.io.IOException;
 
 import net.kronos.rkon.core.Rcon;
-import net.kronos.rkon.core.ex.AuthenticationException;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
