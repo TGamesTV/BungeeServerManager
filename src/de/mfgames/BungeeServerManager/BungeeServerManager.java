@@ -14,6 +14,20 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 public class BungeeServerManager extends Plugin {
 
+	public BungeeServerManager() {
+		bsmInstance = this;
+	}
+	
+	static BungeeServerManager bsmInstance;
+	
+	/*
+	 * getInstance returns BungeeServerManager instance
+	 */
+	public static BungeeServerManager getInstance() {
+		return bsmInstance;
+	}
+	
+	
 	public static String pver = "1.0";	/* Plugin Version */
 	
 	@Override
