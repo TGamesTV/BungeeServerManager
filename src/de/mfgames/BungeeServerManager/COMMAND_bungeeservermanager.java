@@ -9,6 +9,9 @@
  * */
 package de.mfgames.BungeeServerManager;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
@@ -55,6 +58,13 @@ public class COMMAND_bungeeservermanager extends Command {
 			case "restart":
 				controlServer(sender, args);
 				break;
+			case "list":
+				if(args.length > 1) {
+					listServers(sender, Integer.parseInt(args[1]));
+				} else {
+					listServers(sender, 0);
+				}
+				break;
 			case "reload":
 				reloadPlugin(sender);
 				break;
@@ -72,6 +82,7 @@ public class COMMAND_bungeeservermanager extends Command {
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(new TextComponent("§6§l ==== BUNGEE SERVER MANAGER " + BungeeServerManager.pver + " ==== "));
 		sender.sendMessage(new TextComponent("§6/bsm help§r - Shows this"));
+		sender.sendMessage(new TextComponent("§6/bsm list - Lists all servers"));
 		sender.sendMessage(new TextComponent("§6/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]§r - Execute command"));
 		sender.sendMessage(new TextComponent("§6/bsm start <SERVER>§r - Start the given server"));
 		sender.sendMessage(new TextComponent("§6/bsm stop <SERVER>§r - Stop the given server"));
@@ -155,6 +166,24 @@ public class COMMAND_bungeeservermanager extends Command {
 			e.printStackTrace();
 			sender.sendMessage(new TextComponent("§cAn error occured!"));
 		}
+	}
+	
+	/*
+	 * listServers prints all configured servers to the sender
+	 */
+	private void listServers(CommandSender sender, int page) {
+		Collection<String> servers = BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys();
+		sender.sendMessage(new TextComponent("§6 ==== SERVERS - PAGE " + ((int)page + (int)1) + "/" + (int)(servers.size() / 8 + 1) + " ===="));
+		String a[] = new String[servers.size()]; 
+		a = servers.toArray(a);
+		for ( int i = 0; i < 8; i++) {
+			if ( (i + page * 8) >= servers.size()) {
+				break;
+			}
+			String s = a[i + page * 8];
+			sender.sendMessage(new TextComponent("§6" + s));
+		}
+		sender.sendMessage(new TextComponent("§6 =========================="));
 	}
 	
 	/*

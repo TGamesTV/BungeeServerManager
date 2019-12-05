@@ -5,4 +5,5 @@ main: de.mfgames.BungeeServerManager.BungeeServerManager
 
 commands:
   bungeeservermanager:
-    aliases: [bsm]
+    description: BungeeServerManager Command
+    aliases: bsm

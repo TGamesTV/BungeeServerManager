@@ -81,7 +81,6 @@ public class BungeeServerManager extends Plugin {
 	        }
 
 			configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-			//configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File("C:\\Users\\David\\Desktop\\config.yml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
