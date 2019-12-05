@@ -9,9 +9,7 @@
  * */
 package de.mfgames.BungeeServerManager;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
@@ -141,7 +139,7 @@ public class COMMAND_bungeeservermanager extends Command {
 		}
 	}
 	
-	private void startServer(CommandSender sender, String servername) {
+	public static void startServer(CommandSender sender, String servername) {
 		String startScript = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".startscript");
 		String serverDir = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".serverdir");
 		try {
@@ -154,7 +152,7 @@ public class COMMAND_bungeeservermanager extends Command {
 		}
 	}
 	
-	private void stopServer(CommandSender sender, String servername) {
+	public static void stopServer(CommandSender sender, String servername) {
 		String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".addr");
 		int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + servername + ".port");
 		String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".password");

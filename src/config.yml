@@ -5,9 +5,11 @@ servers:
     password: secure
     serverdir: ..\Server1\
     startscript: start.bat
+    active: true
   server2:
     addr: 192.168.2.102
     port: 27015
     password: onetwothree
     serverdir: ..\Server2\
     startscript: start.bat
+    active: true

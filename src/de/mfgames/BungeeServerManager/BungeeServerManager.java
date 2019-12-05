@@ -13,7 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Collection;
 
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -44,11 +46,28 @@ public class BungeeServerManager extends Plugin {
 	public void onEnable() {
 		registerCommands();
 		loadConfiguration();
+		Collection<String> servers = BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys();
+		String a[] = new String[servers.size()];
+		a = servers.toArray(a);
+		for (String s : a) {
+			if (getInstance().getConfiguration().getBoolean("servers." + s + ".active")) {
+				System.out.println("[BungeeServerManager " + pver + "] Starting server \"" + s + "\"");
+				COMMAND_bungeeservermanager.startServer(null, s);
+			}
+		}
+		System.out.println("[BungeeServerManager " + pver + "] Plugin enabled!");
 	}
 	
 	@Override
 	public void onDisable() {
-		
+		Collection<String> servers = BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys();
+		String a[] = new String[servers.size()];
+		a = servers.toArray(a);
+		for (String s : a) {
+			System.out.println("[BungeeServerManager " + pver + "] Stopping server \"" + s + "\"");
+			COMMAND_bungeeservermanager.stopServer(null, s);
+		}
+		System.out.println("[BungeeServerManager " + pver + "] Plugin disabled!");
 	}
 	
 	/*
