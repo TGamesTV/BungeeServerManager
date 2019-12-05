@@ -6,8 +6,10 @@ Die Server können über Commands gestartet/gestoppt/neugestartet werden.
 Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
 
 ### Befehle
+/bungeeservermanager oder /bsm
  - /bsm help - Zeigt die Hilfe an
  - /bsm reload - Läd die Config neu
+ - /bsm list - Listet alle Server auf
  - /bsm \<start/stop\> \<SERVER\> - Startet/Stoppt den angegebenen Server
  - /bsm restart \<SERVER\> - Startet den angegebenen Server neu
  - /bsm cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.
@@ -16,14 +18,42 @@ Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
 bungeeservermanager.\<BEFEHL\>[.\<SERVER\>]  
 z.B. bungeeservermanager.reload oder bungeeservermanager.restart.server1
 
+### Konfiguration
+#### Beispiel Konfiguration
+```YAML
+servers:
+  server1:
+    addr: 192.168.2.101
+    port: 27015
+    password: secure
+    serverdir: ..\Server1\
+    startscript: start.bat
+    active: true
+```
+
+Parameter|Erklärung
+----------|----------
+addr|Adresse des Servers
+port|rcon Port
+password|rcon Passwort
+serverdir|Pfad zum Server
+startscript|Names des Startscripts
+active|Server beim Laden des Plugins starten?
+
+
+Es können beliebig viele Server angegeben werden.
+
+
 ## English
 BungeeServerManager is plugin for managing Minecraft servers in a Bungeecord network.  
 Using commands the servers can be started/stopped/restarted.
 Also commands can be executed on the Minecraft servers using rcon.
 
 ### Commands
+/bungeeservermanager or /bsm
  - /bsm help - Shows help
  - /bsm reload - Reloads the configuration
+ - /bsm list - Lists all servers
  - /bsm \<start/stop\> \<SERVER\> - Starts/stopps the given server
  - /bsm restart \<SERVER\> - Restarts the given server
  - /bsm cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.
@@ -31,3 +61,28 @@ Also commands can be executed on the Minecraft servers using rcon.
 ### Permissions
 bungeeservermanager.\<COMMAND\>[.\<SERVER\>]  
 eg. bungeeservermanager.reload or bungeeservermanager.restart.server1
+
+### Configuration
+#### Example configuration
+```YAML
+servers:
+  server1:
+    addr: 192.168.2.101
+    port: 27015
+    password: secure
+    serverdir: ..\Server1\
+    startscript: start.bat
+    active: true
+```
+
+Parameter|Explaination
+----------|----------
+addr|address of the server
+port|rcon Port
+password|rcon password
+serverdir|path to the server
+startscript|name of the startscript
+active|should the server be started when the plugin is loaded?
+
+
+As many servers can be created as needed.
