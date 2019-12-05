@@ -9,6 +9,7 @@
  * */
 package de.mfgames.BungeeServerManager;
 
+import java.io.File;
 import java.io.IOException;
 
 import net.kronos.rkon.core.Rcon;
@@ -28,7 +29,7 @@ public class COMMAND_bungeeservermanager extends Command {
 			if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase())) {
 				/* Check if sender has server-specific permissions */
 				if (args.length >= 2) {
-					if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase() + args[1].toLowerCase())) {
+					if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase() + "." + args[1].toLowerCase())) {
 						sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
 						return;
 					}
@@ -94,7 +95,7 @@ public class COMMAND_bungeeservermanager extends Command {
 					command += " " + args[i];
 				}
 				String result = rcon.command(command);
-				sender.sendMessage(new TextComponent("Server +\"" + args[1] + "\": " + result));
+				sender.sendMessage(new TextComponent("[BSM] Server \"" + args[1] + "\": " + result));
 			} catch (Exception e) {
 				e.printStackTrace();
 				sender.sendMessage(new TextComponent("§cAn error occured!"));
@@ -131,8 +132,11 @@ public class COMMAND_bungeeservermanager extends Command {
 	
 	private void startServer(CommandSender sender, String servername) {
 		String startScript = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".startscript");
+		String serverDir = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".serverdir");
 		try {
-			Runtime.getRuntime().exec(startScript);
+			ProcessBuilder pb = new ProcessBuilder(startScript);
+			pb.directory(new File(serverDir));
+			pb.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 			sender.sendMessage(new TextComponent("§cAn error occured!"));
