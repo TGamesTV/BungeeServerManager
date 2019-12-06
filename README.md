@@ -43,6 +43,12 @@ active|Server beim Laden des Plugins starten?
 
 Es können beliebig viele Server angegeben werden.
 
+### Installation
+1. BungeeServerManager-\*.jar Datei in den Plugins Ordner von Bungeecord schieben
+2. rcon bei den Spigot Servern konfigurieren und aktivieren
+3. Bungeecord starten, damit der BungeeServerManager-Ordner erstellt wird
+4. BungeeServerManager konfigurieren: config.yml bearbeiten
+
 
 ## English
 BungeeServerManager is plugin for managing Minecraft servers in a Bungeecord network.  
@@ -86,3 +92,9 @@ active|should the server be started when the plugin is loaded?
 
 
 As many servers can be created as needed.
+
+### Installation
+1. Copy the BungeeServerManager-\*.jar file to the plugins folder of Bungeecord
+2. Configure and active rcon on the Spigot servers
+3. Start Bungeecord so that the BungeeServerManager-folder is created
+4. Configure BungeeServerManager by editing the config.yml
