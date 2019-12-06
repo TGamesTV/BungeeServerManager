@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Collection;
+import java.util.HashMap;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -41,6 +42,8 @@ public class BungeeServerManager extends Plugin {
 	
 	Configuration configuration;
 	
+	public HashMap<String, Process> serverProcesses = new HashMap<String, Process>();
+	
 	@Override
 	public void onEnable() {
 		registerCommands();
@@ -63,8 +66,14 @@ public class BungeeServerManager extends Plugin {
 		String a[] = new String[servers.size()];
 		a = servers.toArray(a);
 		for (String s : a) {
-			System.out.println("[BungeeServerManager " + pver + "] Stopping server \"" + s + "\"");
-			COMMAND_bungeeservermanager.stopServer(null, s);
+			if (BungeeServerManager.getInstance().serverProcesses.containsKey(s)) {
+				System.out.println("[BungeeServerManager " + pver + "] Stopping server \"" + s + "\" via Shell");
+				COMMAND_bungeeservermanager.stopServerProcess(null, s);
+			}
+			else {
+				System.out.println("[BungeeServerManager " + pver + "] Stopping server \"" + s + "\" via RCON");
+				COMMAND_bungeeservermanager.stopServer(null, s);
+			}
 		}
 		System.out.println("[BungeeServerManager " + pver + "] Plugin disabled!");
 	}

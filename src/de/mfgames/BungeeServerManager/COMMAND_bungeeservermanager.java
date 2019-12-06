@@ -10,8 +10,14 @@
 package de.mfgames.BungeeServerManager;
 
 import java.util.Collection;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 import net.kronos.rkon.core.Rcon;
 import net.md_5.bungee.api.CommandSender;
@@ -94,20 +100,50 @@ public class COMMAND_bungeeservermanager extends Command {
 	 * */
 	private void executeCmd(CommandSender sender, String[] args) {
 		if (args.length >= 3) {
-			String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + args[1] + ".addr");
-			int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + args[1] + ".port");
-			String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + args[1] + ".password");
-			try {
-				Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
-				String command = args[2];
-				for (int i = 3; i < args.length; i++) {
-					command += " " + args[i];
+			
+			/* Check if server process is in HashMap, if not use RCON*/
+			if (BungeeServerManager.getInstance().serverProcesses.containsKey(args[1])) {	/* Shell */
+				Process p = BungeeServerManager.getInstance().serverProcesses.get(args[1]);
+				try {
+					OutputStream stdin = p.getOutputStream();
+					//InputStream stdout = p.getInputStream();
+					OutputStreamWriter ow = new OutputStreamWriter(stdin);
+					BufferedWriter w = new BufferedWriter(ow);
+					//BufferedReader r = new BufferedReader(new InputStreamReader(stdout));
+					String command = args[2];
+					for (int i = 3; i < args.length; i++) {
+						command += " " + args[i];
+					}
+					w.write(command);
+					w.flush();
+					w.close();
+					ow.flush();
+					ow.close();
+					stdin.flush();
+					stdin.close();
+					//stdout.close();
+					//String result = r.readLine();			// ToDo: Implement results
+					//sender.sendMessage(new TextComponent("[BSM] Server \"" + args[1] + "\": " + result));
+				} catch (IOException e) {
+					e.printStackTrace();
+					sender.sendMessage(new TextComponent("§cAn error occured!"));
 				}
-				String result = rcon.command(command);
-				sender.sendMessage(new TextComponent("[BSM] Server \"" + args[1] + "\": " + result));
-			} catch (Exception e) {
-				e.printStackTrace();
-				sender.sendMessage(new TextComponent("§cAn error occured!"));
+			} else {	/* RCON */
+				String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + args[1] + ".addr");
+				int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + args[1] + ".port");
+				String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + args[1] + ".password");
+				try {
+					Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
+					String command = args[2];
+					for (int i = 3; i < args.length; i++) {
+						command += " " + args[i];
+					}
+					String result = rcon.command(command);
+					sender.sendMessage(new TextComponent("[BSM] Server \"" + args[1] + "\": " + result));
+				} catch (Exception e) {
+					e.printStackTrace();
+					sender.sendMessage(new TextComponent("§cAn error occured!"));
+				}
 			}
 		} else {
 			sender.sendMessage(new TextComponent("§c/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
@@ -123,10 +159,16 @@ public class COMMAND_bungeeservermanager extends Command {
 		if (args.length == 2) {
 			switch (args[0]) {
 			case "start":
+				System.out.println("[BungeeServerManager " + BungeeServerManager.pver + "] Starting server \"" + args[1] + "\"");
 				startServer(sender, args[1]);
 				break;
 			case "stop":
-				stopServer(sender, args[1]);
+				if (BungeeServerManager.getInstance().serverProcesses.containsKey(args[1])) {
+					System.out.println("[BungeeServerManager " + BungeeServerManager.pver + "] Stopping server \"" + args[1] + "\" via Shell");
+					stopServerProcess(sender, args[1]);}
+				else {
+					System.out.println("[BungeeServerManager " + BungeeServerManager.pver + "] Stopping server \"" + args[1] + "\" via RCON");
+					stopServer(sender, args[1]);}
 				break;
 			case "restart":
 				startServer(sender, args[1]);
@@ -145,13 +187,17 @@ public class COMMAND_bungeeservermanager extends Command {
 		try {
 			ProcessBuilder pb = new ProcessBuilder(startScript);
 			pb.directory(new File(serverDir));
-			pb.start();
+			Process p = pb.start();
+			BungeeServerManager.getInstance().serverProcesses.put(servername, p);
 		} catch (IOException e) {
 			e.printStackTrace();
 			sender.sendMessage(new TextComponent("§cAn error occured!"));
 		}
 	}
 	
+	/*
+	 * stopServer stops the server via RCON
+	 */
 	public static void stopServer(CommandSender sender, String servername) {
 		String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".addr");
 		int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + servername + ".port");
@@ -162,6 +208,29 @@ public class COMMAND_bungeeservermanager extends Command {
 			sender.sendMessage(new TextComponent("Server +\"" + servername + "\": " + result + " (Stopping...)"));
 		} catch (Exception e) {
 			e.printStackTrace();
+			sender.sendMessage(new TextComponent("§cAn error occured!"));
+		}
+	}
+	
+	/*
+	 * stopServerProcess stops the server by sending "stop\n" to its process
+	 */
+	public static void stopServerProcess(CommandSender sender, String servername) {
+		if (BungeeServerManager.getInstance().serverProcesses.containsKey(servername)) {
+			Process p = BungeeServerManager.getInstance().serverProcesses.get(servername);
+			try {
+				OutputStream stdin = p.getOutputStream();
+				BufferedWriter w = new BufferedWriter(new OutputStreamWriter(stdin));
+				w.write("stop\n");
+				w.flush();
+				w.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				sender.sendMessage(new TextComponent("§cAn error occured!"));
+			}
+			BungeeServerManager.getInstance().serverProcesses.remove(servername);
+			sender.sendMessage(new TextComponent("§aDestroyed " + servername));
+		} else {
 			sender.sendMessage(new TextComponent("§cAn error occured!"));
 		}
 	}
