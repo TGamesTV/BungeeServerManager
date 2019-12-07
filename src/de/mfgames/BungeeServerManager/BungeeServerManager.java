@@ -40,7 +40,7 @@ public class BungeeServerManager extends Plugin {
 	}
 	
 	
-	public static String pver = "1.0";	/* Plugin Version */
+	public static String pver = "1.1";	/* Plugin Version */
 	public static String pname = "BungeeServerAdmin";	/* Plugin Name */
 	
 	Configuration configuration;
