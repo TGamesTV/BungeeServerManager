@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Collection;
+import java.util.concurrent.Callable;
+
+import org.bstats.bungeecord.Metrics;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -55,6 +58,18 @@ public class BungeeServerManager extends Plugin {
 				COMMAND_bungeeservermanager.startServer(null, s);
 			}
 		}
+		
+		/* bStats */
+		if (getConfiguration().getBoolean("bstats-enable", true)) {
+			Metrics metrics = new Metrics(this);
+			metrics.addCustomChart(new Metrics.SingleLineChart("num_servers", new Callable<Integer>() {
+		        @Override
+		        public Integer call() throws Exception {
+		            return getConfiguration().getSection("servers").getKeys().size();
+		        }
+		    }));
+		}
+
 		System.out.println("[" + pname + " " + pver + "] Plugin enabled!");
 	}
 	

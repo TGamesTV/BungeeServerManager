@@ -1,3 +1,4 @@
+bstats-enable: true
 servers:
   server1:
     addr: 192.168.2.101
