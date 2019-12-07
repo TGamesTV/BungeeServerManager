@@ -1,4 +1,4 @@
-package org.bstats.bungeecord;
+package de.mfgames.BungeeServerManager;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

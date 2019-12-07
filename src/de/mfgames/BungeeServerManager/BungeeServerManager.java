@@ -16,7 +16,7 @@ import java.nio.file.Files;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 
-import org.bstats.bungeecord.Metrics;
+import de.mfgames.BungeeServerManager.Metrics;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
