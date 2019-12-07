@@ -1,9 +1,9 @@
-name: BungeeServerManager
+name: BungeeServerAdmin
 version: 1.0
 authors: [TGamesTV, DavidoTek]
 main: de.mfgames.BungeeServerManager.BungeeServerManager
 
 commands:
-  bungeeservermanager:
-    description: BungeeServerManager Command
-    aliases: bsm
+  bungeeserveradmin:
+    description: BungeeServerAdmin Command
+    aliases: bsa

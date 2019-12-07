@@ -1,5 +1,5 @@
 /*
- * BungeeServerManager v1.0
+ * BungeeServerAdmin v1.1
  * 
  * Copyright (C) 2019 TGamesTV
  * Copyright (C) 2019 DavidoTek
@@ -38,6 +38,7 @@ public class BungeeServerManager extends Plugin {
 	
 	
 	public static String pver = "1.0";	/* Plugin Version */
+	public static String pname = "BungeeServerAdmin";	/* Plugin Name */
 	
 	Configuration configuration;
 	
@@ -50,11 +51,11 @@ public class BungeeServerManager extends Plugin {
 		a = servers.toArray(a);
 		for (String s : a) {
 			if (getInstance().getConfiguration().getBoolean("servers." + s + ".active")) {
-				System.out.println("[BungeeServerManager " + pver + "] Starting server \"" + s + "\"");
+				System.out.println("[" + pname + " " + pver + "] Starting server \"" + s + "\"");
 				COMMAND_bungeeservermanager.startServer(null, s);
 			}
 		}
-		System.out.println("[BungeeServerManager " + pver + "] Plugin enabled!");
+		System.out.println("[" + pname + " " + pver + "] Plugin enabled!");
 	}
 	
 	@Override
@@ -63,18 +64,18 @@ public class BungeeServerManager extends Plugin {
 		String a[] = new String[servers.size()];
 		a = servers.toArray(a);
 		for (String s : a) {
-			System.out.println("[BungeeServerManager " + pver + "] Stopping server \"" + s + "\"");
+			System.out.println("[" + pname + " " + pver + "] Stopping server \"" + s + "\"");
 			COMMAND_bungeeservermanager.stopServer(null, s);
 		}
-		System.out.println("[BungeeServerManager " + pver + "] Plugin disabled!");
+		System.out.println("[" + pname + " " + pver + "] Plugin disabled!");
 	}
 	
 	/*
 	 * registerCommands registers the commands at Bungeecord
 	 */
 	public void registerCommands() {
-		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeservermanager("bungeeservermanager"));
-		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeservermanager("bsm"));
+		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeservermanager("bungeeserveradmin"));
+		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeservermanager("bsa"));
 	}
 	
 	/*

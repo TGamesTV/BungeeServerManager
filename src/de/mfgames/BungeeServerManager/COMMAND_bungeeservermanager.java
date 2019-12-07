@@ -1,5 +1,5 @@
 /*
- * BungeeServerManager v1.0
+ * BungeeServerAdmin v1.1
  * 
  * Copyright (C) 2019 TGamesTV
  * Copyright (C) 2019 DavidoTek
@@ -27,10 +27,10 @@ public class COMMAND_bungeeservermanager extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		/* Check if sender has the permissions (print message and return if not) */
 		if (args.length > 0) {
-			if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase())) {
+			if (!sender.hasPermission("bungeeserveradmin." + args[0].toLowerCase())) {
 				/* Check if sender has server-specific permissions */
 				if (args.length >= 2) {
-					if (!sender.hasPermission("bungeeservermanager." + args[0].toLowerCase() + "." + args[1].toLowerCase())) {
+					if (!sender.hasPermission("bungeeserveradmin." + args[0].toLowerCase() + "." + args[1].toLowerCase())) {
 						sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
 						return;
 					}
@@ -78,14 +78,14 @@ public class COMMAND_bungeeservermanager extends Command {
 	 * Shows help
 	 * */
 	private void showHelp(CommandSender sender) {
-		sender.sendMessage(new TextComponent("§6§l ==== BUNGEE SERVER MANAGER " + BungeeServerManager.pver + " ==== "));
-		sender.sendMessage(new TextComponent("§6/bsm help§r - Shows this"));
-		sender.sendMessage(new TextComponent("§6/bsm list - Lists all servers"));
-		sender.sendMessage(new TextComponent("§6/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]§r - Execute command"));
-		sender.sendMessage(new TextComponent("§6/bsm start <SERVER>§r - Start the given server"));
-		sender.sendMessage(new TextComponent("§6/bsm stop <SERVER>§r - Stop the given server"));
-		sender.sendMessage(new TextComponent("§6/bsm restart <SERVER>§r - Restart the given server"));
-		sender.sendMessage(new TextComponent("§6/bsm reload§r - Reloads the plugin/configuration"));
+		sender.sendMessage(new TextComponent("§6§l ==== BUNGEE SERVER ADMIN " + BungeeServerManager.pver + " ==== "));
+		sender.sendMessage(new TextComponent("§6/bsa help§r - Shows this"));
+		sender.sendMessage(new TextComponent("§6/bsa list - Lists all servers"));
+		sender.sendMessage(new TextComponent("§6/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]§r - Execute command"));
+		sender.sendMessage(new TextComponent("§6/bsa start <SERVER>§r - Start the given server"));
+		sender.sendMessage(new TextComponent("§6/bsa stop <SERVER>§r - Stop the given server"));
+		sender.sendMessage(new TextComponent("§6/bsa restart <SERVER>§r - Restart the given server"));
+		sender.sendMessage(new TextComponent("§6/bsa reload§r - Reloads the plugin/configuration"));
 	}
 	
 	/*
@@ -104,13 +104,13 @@ public class COMMAND_bungeeservermanager extends Command {
 					command += " " + args[i];
 				}
 				String result = rcon.command(command);
-				sender.sendMessage(new TextComponent("[BSM] Server \"" + args[1] + "\": " + result));
+				sender.sendMessage(new TextComponent("[BSA] Server \"" + args[1] + "\": " + result));
 			} catch (Exception e) {
 				e.printStackTrace();
 				sender.sendMessage(new TextComponent("§cAn error occured!"));
 			}
 		} else {
-			sender.sendMessage(new TextComponent("§c/bsm cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
+			sender.sendMessage(new TextComponent("§c/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
 			showHelp(sender);
 		}
 	}
@@ -133,7 +133,7 @@ public class COMMAND_bungeeservermanager extends Command {
 				stopServer(sender, args[1]);
 				break;
 			default:
-				sender.sendMessage(new TextComponent("§c/bsm <start/stop/restart> <SERVER>"));
+				sender.sendMessage(new TextComponent("§c/bsa <start/stop/restart> <SERVER>"));
 				showHelp(sender);
 			}
 		}
