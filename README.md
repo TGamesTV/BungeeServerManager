@@ -13,6 +13,7 @@ Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
  - /bsa \<start/stop\> \<SERVER\> - Startet/Stoppt den angegebenen Server
  - /bsa restart \<SERVER\> - Startet den angegebenen Server neu
  - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.
+Wenn statt dem Servernamen "allservers" eingegeben wird, wird der Befehl auf allen Servern ausgef�hrt.
 
 ### Permissions
 bungeeserveradmin.\<BEFEHL\>[.\<SERVER\>]  
@@ -63,6 +64,7 @@ Also commands can be executed on the Minecraft servers using rcon.
  - /bsa \<start/stop\> \<SERVER\> - Starts/stopps the given server
  - /bsa restart \<SERVER\> - Restarts the given server
  - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.
+By typing "allservers" instead of the server name, the command is executed on all servers.
 
 ### Permissions
 bungeeserveradmin.\<COMMAND\>[.\<SERVER\>]  

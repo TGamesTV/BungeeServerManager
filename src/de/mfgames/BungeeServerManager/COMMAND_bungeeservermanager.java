@@ -49,12 +49,12 @@ public class COMMAND_bungeeservermanager extends Command {
 				showHelp(sender);
 				break;
 			case "cmd":
-				executeCmd(sender, args);
+				handleMultiple(sender, args, 1);
 				break;
 			case "start":
 			case "stop":
 			case "restart":
-				controlServer(sender, args);
+				handleMultiple(sender, args, 2);
 				break;
 			case "list":
 				if(args.length > 1) {
@@ -70,6 +70,36 @@ public class COMMAND_bungeeservermanager extends Command {
 			
 		} else {
 			showHelp(sender);
+		}
+	}
+	
+	/*
+	 * handleMultiple handles the Server argument 'allservers' to execute the command on all servers.
+	 */
+	private void handleMultiple(CommandSender sender, String[] args, int cmd) {
+		if (args[1].equalsIgnoreCase("allservers")) {
+			Collection<String> servers = BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys();
+			for (String s : servers) {
+				switch (cmd) {
+				case 1:
+					args[1] = s;
+					executeCmd(sender, args);
+					break;
+				case 2:
+					args[1] = s;
+					controlServer(sender, args);
+					break;
+				}
+			}
+		} else {
+			switch (cmd) {
+			case 1:
+				executeCmd(sender, args);
+				break;
+			case 2:
+				controlServer(sender, args);
+				break;
+			}
 		}
 	}
 	
