@@ -22,6 +22,7 @@ z.B. bungeeserveradmin.reload oder bungeeserveradmin.restart.server1
 ### Konfiguration
 #### Beispiel Konfiguration
 ```YAML
+bstats-enable: true
 servers:
   server1:
     addr: 192.168.2.101
@@ -34,6 +35,7 @@ servers:
 
 Parameter|ErklÃ¤rung
 ----------|----------
+bstats-enable|Soll das Plugin bStats verwenden?
 addr|Adresse des Servers
 port|rcon Port
 password|rcon Passwort
@@ -73,6 +75,7 @@ eg. bungeeserveradmin.reload or bungeeserveradmin.restart.server1
 ### Configuration
 #### Example configuration
 ```YAML
+bstats-enable: true
 servers:
   server1:
     addr: 192.168.2.101
@@ -85,6 +88,7 @@ servers:
 
 Parameter|Explaination
 ----------|----------
+bstats-enable|Should the plugin use bStats?
 addr|address of the server
 port|rcon Port
 password|rcon password
