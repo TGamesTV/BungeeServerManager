@@ -8,12 +8,12 @@ Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
 ### Befehle
 /bungeeserveradmin oder /bsa
  - /bsa help - Zeigt die Hilfe an
- - /bsa reload - Läd die Config neu
+ - /bsa reload - LÃ¤d die Config neu
  - /bsa list - Listet alle Server auf
  - /bsa \<start/stop\> \<SERVER\> - Startet/Stoppt den angegebenen Server
  - /bsa restart \<SERVER\> - Startet den angegebenen Server neu
- - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.
-Wenn statt dem Servernamen "allservers" eingegeben wird, wird der Befehl auf allen Servern ausgef�hrt.
+ - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.  
+Wenn statt dem Servernamen "allservers" eingegeben wird, wird der Befehl auf allen Servern ausgeführt.
 
 ### Permissions
 bungeeserveradmin.\<BEFEHL\>[.\<SERVER\>]  
@@ -32,7 +32,7 @@ servers:
     active: true
 ```
 
-Parameter|Erklärung
+Parameter|ErklÃ¤rung
 ----------|----------
 addr|Adresse des Servers
 port|rcon Port
@@ -63,7 +63,7 @@ Also commands can be executed on the Minecraft servers using rcon.
  - /bsa list - Lists all servers
  - /bsa \<start/stop\> \<SERVER\> - Starts/stopps the given server
  - /bsa restart \<SERVER\> - Restarts the given server
- - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.
+ - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.  
 By typing "allservers" instead of the server name, the command is executed on all servers.
 
 ### Permissions
