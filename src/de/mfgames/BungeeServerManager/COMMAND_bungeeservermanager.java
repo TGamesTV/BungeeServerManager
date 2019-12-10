@@ -1,5 +1,5 @@
 /*
- * BungeeServerAdmin v1.1
+ * BungeeServerAdmin
  * 
  * Copyright (C) 2019 TGamesTV
  * Copyright (C) 2019 DavidoTek

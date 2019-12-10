@@ -1,5 +1,5 @@
 /*
- * BungeeServerAdmin v1.1
+ * BungeeServerAdmin
  * 
  * Copyright (C) 2019 TGamesTV
  * Copyright (C) 2019 DavidoTek
@@ -40,7 +40,7 @@ public class BungeeServerManager extends Plugin {
 	}
 	
 	
-	public static String pver = "1.1";	/* Plugin Version */
+	public static String pver = "1.3";	/* Plugin Version */
 	public static String pname = "BungeeServerAdmin";	/* Plugin Name */
 	
 	Configuration configuration;
