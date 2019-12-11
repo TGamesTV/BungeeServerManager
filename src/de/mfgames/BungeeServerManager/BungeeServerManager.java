@@ -40,7 +40,7 @@ public class BungeeServerManager extends Plugin {
 	}
 	
 	
-	public static String pver = "1.3";	/* Plugin Version */
+	public static String pver = "1.4";	/* Plugin Version */
 	public static String pname = "BungeeServerAdmin";	/* Plugin Name */
 	
 	Configuration configuration;
@@ -91,6 +91,8 @@ public class BungeeServerManager extends Plugin {
 	public void registerCommands() {
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeservermanager("bungeeserveradmin"));
 		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeservermanager("bsa"));
+		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeserverstats("bungeeserverstats"));
+		ProxyServer.getInstance().getPluginManager().registerCommand(this, new COMMAND_bungeeserverstats("bss"));
 	}
 	
 	/*
