@@ -1,5 +1,5 @@
 name: BungeeServerAdmin
-version: 1.3
+version: 1.4
 authors: [TGamesTV, DavidoTek]
 main: de.mfgames.BungeeServerManager.BungeeServerManager
 
@@ -7,3 +7,6 @@ commands:
   bungeeserveradmin:
     description: BungeeServerAdmin Command
     aliases: bsa
+  bungeeserverstats:
+    description: Show statistics / system usage
+    aliases: bss

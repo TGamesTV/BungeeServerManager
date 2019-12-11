@@ -210,7 +210,16 @@ public class COMMAND_bungeeservermanager extends Command {
 				break;
 			}
 			String s = a[i + page * 8];
-			sender.sendMessage(new TextComponent("§6" + s));
+
+			String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + s + ".addr");
+			int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + s + ".port");
+			String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + s + ".password");
+			try {
+				Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
+				sender.sendMessage(new TextComponent("§6" + s + " §r[§aONLINE§r]"));
+			} catch (Exception e) {
+				sender.sendMessage(new TextComponent("§6" + s + " §r[§cOFFLINE§r]"));
+			}
 		}
 		sender.sendMessage(new TextComponent("§6 =========================="));
 	}
