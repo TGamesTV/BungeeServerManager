@@ -217,6 +217,7 @@ public class COMMAND_bungeeservermanager extends Command {
 			try {
 				Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
 				sender.sendMessage(new TextComponent("§6" + s + " §r[§aONLINE§r]"));
+				rcon.disconnect();
 			} catch (Exception e) {
 				sender.sendMessage(new TextComponent("§6" + s + " §r[§cOFFLINE§r]"));
 			}
