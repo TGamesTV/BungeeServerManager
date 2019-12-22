@@ -42,8 +42,8 @@ port|rcon Port
 password|rcon Passwort
 serverdir|Pfad zum Server
 startscript|Names des Startscripts
-active|Server beim Laden des Plugins starten?
-always-stop|Stoppt den Server auch dann, wenn er nicht von BSA gestartet wurde
+active|Server beim Laden des Plugins starten? (Falls nicht gesetzt: false)
+always-stop|Stoppt den Server auch dann, wenn er nicht von BSA gestartet wurde (Falls nicht gesetzt: false)
 
 
 Es können beliebig viele Server angegeben werden.
@@ -97,8 +97,8 @@ port|rcon Port
 password|rcon password
 serverdir|path to the server
 startscript|name of the startscript
-active|should the server be started when the plugin is loaded?
-always-stop|also stopps the server if it has not been started by bsa
+active|should the server be started when the plugin is loaded? (Defaults to false)
+always-stop|also stopps the server if it has not been started by bsa (Defaults to false)
 
 
 As many servers can be created as needed.
