@@ -11,7 +11,7 @@ package de.mfgames.BungeeServerManager;
 
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
+import com.sun.management.OperatingSystemMXBean;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -32,11 +32,12 @@ public class COMMAND_bungeeserverstats extends Command {
 			return;
 		}
 		
-		OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
+		OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		
 		sender.sendMessage(new TextComponent("§6§l ==== SYSTEM INFORMATION ==== "));
-		sender.sendMessage(new TextComponent("§6OS: " + System.getProperty("os.name")));
-		sender.sendMessage(new TextComponent("§CPU: " + operatingSystemMXBean.getSystemLoadAverage()));
+		sender.sendMessage(new TextComponent("§6OS: " + System.getProperty("os.name") + " " + System.getProperty("os.arch")));
+		sender.sendMessage(new TextComponent("§6CPU: " + operatingSystemMXBean.getProcessCpuLoad()));
+		sender.sendMessage(new TextComponent("§6JVM: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version")));
 		sender.sendMessage(new TextComponent("§6JVM Memory: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + "M"));
 		
 	}
