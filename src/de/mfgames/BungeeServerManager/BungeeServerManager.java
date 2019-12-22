@@ -53,7 +53,7 @@ public class BungeeServerManager extends Plugin {
 		String a[] = new String[servers.size()];
 		a = servers.toArray(a);
 		for (String s : a) {
-			if (getInstance().getConfiguration().getBoolean("servers." + s + ".active")) {
+			if (getInstance().getConfiguration().getBoolean("servers." + s + ".active", false)) {
 				System.out.println("[" + pname + " " + pver + "] Starting server \"" + s + "\"");
 				COMMAND_bungeeservermanager.startServer(null, s);
 			}
