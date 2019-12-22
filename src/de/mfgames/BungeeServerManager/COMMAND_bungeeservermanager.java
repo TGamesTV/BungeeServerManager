@@ -193,11 +193,15 @@ public class COMMAND_bungeeservermanager extends Command {
 		try {
 			Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
 			String result = rcon.command("stop");
-			sender.sendMessage(new TextComponent("Server +\"" + servername + "\": " + result + " (Stopping...)"));
+			if (sender != null) {
+				sender.sendMessage(new TextComponent("Server +\"" + servername + "\": " + result + " (Stopping...)"));
+			}
 			rcon.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
-			sender.sendMessage(new TextComponent("§cAn error occured!"));
+			if (sender != null) {
+				sender.sendMessage(new TextComponent("§cAn error occured!"));
+			}
 		}
 	}
 	
