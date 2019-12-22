@@ -180,7 +180,9 @@ public class COMMAND_bungeeservermanager extends Command {
 			pb.start();
 		} catch (IOException e) {
 			e.printStackTrace();
-			sender.sendMessage(new TextComponent("§cAn error occured!"));
+			if (sender != null) {
+				sender.sendMessage(new TextComponent("§cAn error occured!"));
+			}
 		}
 	}
 	
