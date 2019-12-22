@@ -61,7 +61,7 @@ public class COMMAND_bungeeservermanager extends Command {
 				if(args.length > 1) {
 					listServers(sender, Integer.parseInt(args[1]));
 				} else {
-					listServers(sender, 0);
+					listServers(sender, 1);
 				}
 				break;
 			case "reload":
@@ -136,6 +136,7 @@ public class COMMAND_bungeeservermanager extends Command {
 				}
 				String result = rcon.command(command);
 				sender.sendMessage(new TextComponent("[BSA] Server \"" + args[1] + "\": " + result));
+				rcon.disconnect();
 			} catch (Exception e) {
 				e.printStackTrace();
 				sender.sendMessage(new TextComponent("§cAn error occured!"));
@@ -191,6 +192,7 @@ public class COMMAND_bungeeservermanager extends Command {
 			Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
 			String result = rcon.command("stop");
 			sender.sendMessage(new TextComponent("Server +\"" + servername + "\": " + result + " (Stopping...)"));
+			rcon.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 			sender.sendMessage(new TextComponent("§cAn error occured!"));
@@ -202,18 +204,25 @@ public class COMMAND_bungeeservermanager extends Command {
 	 */
 	private void listServers(CommandSender sender, int page) {
 		Collection<String> servers = BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys();
-		sender.sendMessage(new TextComponent("§6 ==== SERVERS - PAGE " + ((int)page + (int)1) + "/" + (int)(servers.size() / 8 + 1) + " ===="));
-		String a[] = new String[servers.size()]; 
+		
+		int pages = (servers.size() - 1) / 8 + 1;
+		sender.sendMessage(new TextComponent("§6 ==== SERVERS - PAGE " + page + "/" + pages + " ===="));
+		
+
+		String a[] = new String[servers.size()];
 		a = servers.toArray(a);
-		for ( int i = 0; i < 8; i++) {
-			if ( (i + page * 8) >= servers.size()) {
+		
+		for (int i = (page - 1) * 8; i < page * 8; i++) {
+			if (i == a.length) {
 				break;
 			}
-			String s = a[i + page * 8];
-
+			
+			String s = a[i];
+			
 			String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + s + ".addr");
 			int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + s + ".port");
 			String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + s + ".password");
+			
 			try {
 				Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
 				sender.sendMessage(new TextComponent("§6" + s + " §r[§aONLINE§r]"));
@@ -222,7 +231,8 @@ public class COMMAND_bungeeservermanager extends Command {
 				sender.sendMessage(new TextComponent("§6" + s + " §r[§cOFFLINE§r]"));
 			}
 		}
-		sender.sendMessage(new TextComponent("§6 =========================="));
+		
+		sender.sendMessage(new TextComponent("§6 ============================"));
 	}
 	
 	/*
