@@ -31,6 +31,7 @@ servers:
     serverdir: ..\Server1\
     startscript: start.bat
     active: true
+    always-stop: false
 ```
 
 Parameter|ErklÃ¤rung
@@ -42,6 +43,7 @@ password|rcon Passwort
 serverdir|Pfad zum Server
 startscript|Names des Startscripts
 active|Server beim Laden des Plugins starten?
+always-stop|Stoppt den Server auch dann, wenn er nicht von BSA gestartet wurde
 
 
 Es können beliebig viele Server angegeben werden.
@@ -84,6 +86,7 @@ servers:
     serverdir: ..\Server1\
     startscript: start.bat
     active: true
+    always-stop: false
 ```
 
 Parameter|Explaination
@@ -95,6 +98,7 @@ password|rcon password
 serverdir|path to the server
 startscript|name of the startscript
 active|should the server be started when the plugin is loaded?
+always-stop|also stopps the server if it has not been started by bsa
 
 
 As many servers can be created as needed.
