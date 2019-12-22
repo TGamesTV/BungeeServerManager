@@ -7,6 +7,7 @@ servers:
     serverdir: ..\Server1\
     startscript: start.bat
     active: true
+    always-stop: false
   server2:
     addr: 192.168.2.102
     port: 27015
@@ -14,3 +15,4 @@ servers:
     serverdir: ..\Server2\
     startscript: start.bat
     active: true
+    always-stop: false

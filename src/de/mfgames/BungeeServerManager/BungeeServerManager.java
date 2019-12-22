@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 
@@ -79,8 +80,10 @@ public class BungeeServerManager extends Plugin {
 		String a[] = new String[servers.size()];
 		a = servers.toArray(a);
 		for (String s : a) {
-			System.out.println("[" + pname + " " + pver + "] Stopping server \"" + s + "\"");
-			COMMAND_bungeeservermanager.stopServer(null, s);
+			if (getInstance().getConfiguration().getBoolean("servers." + s + ".active", false) || getInstance().getConfiguration().getBoolean("servers." + s + ".always-stop", false)) {
+				System.out.println("[" + pname + " " + pver + "] Stopping server \"" + s + "\"");
+				COMMAND_bungeeservermanager.stopServer(null, s);
+			}
 		}
 		System.out.println("[" + pname + " " + pver + "] Plugin disabled!");
 	}
