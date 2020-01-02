@@ -16,3 +16,7 @@ servers:
     startscript: start.bat
     active: true
     always-stop: false
+system-commands:
+  runexplorer:
+    execute: 'explorer'
+    permission: 'bungeeserveradmin.stats.commands.explorer'
