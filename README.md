@@ -15,6 +15,10 @@ Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
  - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.  
 Wenn statt dem Servernamen "allservers" eingegeben wird, wird der Befehl auf allen Servern ausgeführt.
 
+/bungeeserverstats oder /bss
+ - /bss - Zeigt System Informationen an
+ - /bss cmd \<command\> - Führt den Befehlt auf dem System aus (Muss konfiguriert werden)
+
 ### Permissions
 bungeeserveradmin.\<BEFEHL\>[.\<SERVER\>]  
 z.B. bungeeserveradmin.reload oder bungeeserveradmin.restart.server1
@@ -32,6 +36,10 @@ servers:
     startscript: start.bat
     active: true
     always-stop: false
+system-commands:
+  runexplorer:
+    execute: 'explorer'
+    permission: 'bungeeserveradmin.stats.commands.explorer'
 ```
 
 Parameter|ErklÃ¤rung
@@ -44,6 +52,8 @@ serverdir|Pfad zum Server
 startscript|Names des Startscripts
 active|Server beim Laden des Plugins starten? (Falls nicht gesetzt: false)
 always-stop|Stoppt den Server auch dann, wenn er nicht von BSA gestartet wurde (Falls nicht gesetzt: false)
+execute|Befehl, der auf dem System ausgeführt werden soll
+permission|Berechtigung für den Befehl
 
 
 Es können beliebig viele Server angegeben werden.
@@ -70,6 +80,10 @@ Also commands can be executed on the Minecraft servers using rcon.
  - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.  
 By typing "allservers" instead of the server name, the command is executed on all servers.
 
+/bungeeserverstats or /bss
+ - /bss - Shows system information
+ - /bss cmd \<command\> - Executes the command on the system (needs to be configured)
+
 ### Permissions
 bungeeserveradmin.\<COMMAND\>[.\<SERVER\>]  
 eg. bungeeserveradmin.reload or bungeeserveradmin.restart.server1
@@ -87,6 +101,10 @@ servers:
     startscript: start.bat
     active: true
     always-stop: false
+system-commands:
+  runexplorer:
+    execute: 'explorer'
+    permission: 'bungeeserveradmin.stats.commands.explorer'
 ```
 
 Parameter|Explaination
@@ -99,6 +117,8 @@ serverdir|path to the server
 startscript|name of the startscript
 active|should the server be started when the plugin is loaded? (Defaults to false)
 always-stop|also stopps the server if it has not been started by bsa (Defaults to false)
+execute|Command to be executed on the system
+permission|Permission for the command
 
 
 As many servers can be created as needed.
