@@ -14,6 +14,8 @@ Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
  - /bsa restart \<SERVER\> - Startet den angegebenen Server neu
  - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.  
 Wenn statt dem Servernamen "allservers" eingegeben wird, wird der Befehl auf allen Servern ausgeführt.
+ - /bsa add \<NAME\> \<ADDR\> \<RCON PORT\> \<PASSWORD\> \<SERVER DIR\> \<SCRIPT\> \<ACTIVE\> \<ALWAYS STOP\> - Fügt den Server hinzu
+ - /bsa remove \<SERVER NAME\> \<SERVER NAME WIEDERHOLEN\> - Server entfernen
 
 /bungeeserverstats oder /bss
  - /bss - Zeigt System Informationen an
@@ -79,6 +81,8 @@ Also commands can be executed on the Minecraft servers using rcon.
  - /bsa restart \<SERVER\> - Restarts the given server
  - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.  
 By typing "allservers" instead of the server name, the command is executed on all servers.
+ - /bsa add \<NAME\> \<ADDR\> \<RCON PORT\> \<PASSWORD\> \<SERVER DIR\> \<SCRIPT\> \<ACTIVE\> \<ALWAYS STOP\> - Adds the server
+ - /bsa remove \<SERVER NAME\> \<SERVER NAME WIEDERHOLEN\> - Removes the server
 
 /bungeeserverstats or /bss
  - /bss - Shows system information
