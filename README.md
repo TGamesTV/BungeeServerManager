@@ -1,96 +1,28 @@
 # BungeeServerAdmin
-
-## Deutsch
-BungeeServerAdmin ist ein Plugin zur Verwaltung von Minecraft Servers in einem BungeeCord-Netzwerk.  
-Die Server können über Commands gestartet/gestoppt/neugestartet werden.
-Zudem können Befehle auf den Minecraft Servern via rcon ausgeführt werden.
-
-### Befehle
-/bungeeserveradmin oder /bsa
- - /bsa help - Zeigt die Hilfe an
- - /bsa reload - LÃ¤d die Config neu
- - /bsa list - Listet alle Server auf
- - /bsa \<start/stop\> \<SERVER\> - Startet/Stoppt den angegebenen Server
- - /bsa restart \<SERVER\> - Startet den angegebenen Server neu
- - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Führt einen Befehl mit optionalen Argumenten auf dem Server aus.  
-Wenn statt dem Servernamen "allservers" eingegeben wird, wird der Befehl auf allen Servern ausgeführt.
- - /bsa add \<NAME\> \<ADDR\> \<RCON PORT\> \<PASSWORD\> \<SERVER DIR\> \<SCRIPT\> \<ACTIVE\> \<ALWAYS STOP\> - Fügt den Server hinzu
- - /bsa remove \<SERVER NAME\> \<SERVER NAME WIEDERHOLEN\> - Server entfernen
-
-/bungeeserverstats oder /bss
- - /bss - Zeigt System Informationen an
- - /bss cmd \<command\> - Führt den Befehlt auf dem System aus (Muss konfiguriert werden)
-
-### Permissions
-bungeeserveradmin.\<BEFEHL\>[.\<SERVER\>]  
-z.B. bungeeserveradmin.reload oder bungeeserveradmin.restart.server1
-
-### Konfiguration
-#### Beispiel Konfiguration
-```YAML
-bstats-enable: true
-servers:
-  server1:
-    addr: 192.168.2.101
-    port: 27015
-    password: secure
-    serverdir: ..\Server1\
-    startscript: start.bat
-    active: true
-    always-stop: false
-system-commands:
-  runexplorer:
-    execute: 'explorer'
-    permission: 'bungeeserveradmin.stats.commands.explorer'
-```
-
-Parameter|ErklÃ¤rung
-----------|----------
-bstats-enable|Soll das Plugin bStats verwenden?
-addr|Adresse des Servers
-port|rcon Port
-password|rcon Passwort
-serverdir|Pfad zum Server
-startscript|Names des Startscripts
-active|Server beim Laden des Plugins starten? (Falls nicht gesetzt: false)
-always-stop|Stoppt den Server auch dann, wenn er nicht von BSA gestartet wurde (Falls nicht gesetzt: false)
-execute|Befehl, der auf dem System ausgeführt werden soll
-permission|Berechtigung für den Befehl
-
-
-Es können beliebig viele Server angegeben werden.
-
-### Installation
-1. BungeeServerAdmin-\*.jar Datei in den Plugins Ordner von Bungeecord schieben
-2. rcon bei den Spigot Servern konfigurieren und aktivieren
-3. Bungeecord starten, damit der BungeeServerAdmin-Ordner erstellt wird
-4. BungeeServerAdmin konfigurieren: config.yml bearbeiten
-
-
-## English
 BungeeServerAdmin is plugin for managing Minecraft servers in a Bungeecord network.  
 Using commands the servers can be started/stopped/restarted.
 Also commands can be executed on the Minecraft servers using rcon.
 
 ### Commands
-/bungeeserveradmin or /bsa
- - /bsa help - Shows help
- - /bsa reload - Reloads the configuration
- - /bsa list - Lists all servers
- - /bsa \<start/stop\> \<SERVER\> - Starts/stopps the given server
- - /bsa restart \<SERVER\> - Restarts the given server
- - /bsa cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] - Executes the command with optional arguments on the server.  
-By typing "allservers" instead of the server name, the command is executed on all servers.
- - /bsa add \<NAME\> \<ADDR\> \<RCON PORT\> \<PASSWORD\> \<SERVER DIR\> \<SCRIPT\> \<ACTIVE\> \<ALWAYS STOP\> - Adds the server
- - /bsa remove \<SERVER NAME\> \<SERVER NAME WIEDERHOLEN\> - Removes the server
+Command | Explaination
+----------|----------
+**/bsa** help | Lists all available commands
+**/bsa** reload | Reloads the configuration
+**/bsa** list | Lists all servers
+**/bsa** \<start/stop\> \<SERVER\> | Starts/stopps the given server\*
+**/bsa** restart \<SERVER\> | Restarts the given server\*
+**/bsa** cmd \<SERVER\> \<COMMAND\> [\<ARGUMENTS\>] | Executes the command with optional arguments on the server\*
+**/bsa** add \<NAME\> \<ADDR\> \<RCON PORT\> \<PASSWORD\> \<SERVER DIR\> \<SCRIPT\> \<ACTIVE\> \<ALWAYS STOP\> | Adds the server
+**/bsa** remove \<SERVER NAME\> \<SERVER NAME WIEDERHOLEN\> | Removes the server
+**/bss** | Shows system information
+**/bss** cmd \<command\> | Executes the command on the system (needs to be configured)
 
-/bungeeserverstats or /bss
- - /bss - Shows system information
- - /bss cmd \<command\> - Executes the command on the system (needs to be configured)
+\*By typing `allservers` instead of the server name, the command is executed on all servers.
 
 ### Permissions
 bungeeserveradmin.\<COMMAND\>[.\<SERVER\>]  
-eg. bungeeserveradmin.reload or bungeeserveradmin.restart.server1
+eg. bungeeserveradmin.reload or bungeeserveradmin.restart.server1  
+For **/bss cmd** the permissions need to be defined in the configuration.  
 
 ### Configuration
 #### Example configuration
@@ -125,7 +57,7 @@ execute|Command to be executed on the system
 permission|Permission for the command
 
 
-As many servers can be created as needed.
+As many servers/commands can be created as needed.
 
 ### Installation
 1. Copy the BungeeServerAdmin-\*.jar file to the plugins folder of Bungeecord
