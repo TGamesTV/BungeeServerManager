@@ -22,6 +22,7 @@ Befehl | Erklärung
 ## Rechte
 bungeeserveradmin.\<BEFEHL\>[.\<SERVER\>]  
 z.B. bungeeserveradmin.reload oder bungeeserveradmin.restart.server1  
+**/bss** permissions: bungeeserveradmin.stats  
 Für **/bss cmd** müssen die Befehle in der Config definiert werden.  
 
 ## Konfiguration
