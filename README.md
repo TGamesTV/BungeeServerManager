@@ -22,6 +22,7 @@ Command | Explaination
 ## Permissions
 bungeeserveradmin.\<COMMAND\>[.\<SERVER\>]  
 eg. bungeeserveradmin.reload or bungeeserveradmin.restart.server1  
+**/bss** permissions: bungeeserveradmin.stats
 For **/bss cmd** the permissions need to be defined in the configuration.  
 
 ## Configuration
