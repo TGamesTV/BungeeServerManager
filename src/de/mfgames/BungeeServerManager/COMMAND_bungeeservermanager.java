@@ -144,7 +144,7 @@ public class COMMAND_bungeeservermanager extends Command {
 					command += " " + args[i];
 				}
 				String result = rcon.command(command);
-				sender.sendMessage(new TextComponent("[BSA] Server \"" + args[1] + "\": " + result));
+				sender.sendMessage(new TextComponent("§6Server §a" + args[1] + "§6: " + result));
 				rcon.disconnect();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -187,6 +187,9 @@ public class COMMAND_bungeeservermanager extends Command {
 			ProcessBuilder pb = new ProcessBuilder(startScript);
 			pb.directory(new File(serverDir));
 			pb.start();
+			if (sender != null) {
+				sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: Starting..."));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			if (sender != null) {
@@ -203,7 +206,7 @@ public class COMMAND_bungeeservermanager extends Command {
 			Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
 			String result = rcon.command("stop");
 			if (sender != null) {
-				sender.sendMessage(new TextComponent("Server +\"" + servername + "\": " + result + " (Stopping...)"));
+				sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: " + result + " (Stopping...)"));
 			}
 			rcon.disconnect();
 		} catch (Exception e) {
