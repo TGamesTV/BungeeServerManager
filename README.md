@@ -1,5 +1,5 @@
 # BungeeServerAdmin
-BungeeServerAdmin is plugin for managing Minecraft servers in a Bungeecord network.  
+BungeeServerAdmin is a plugin for managing Minecraft servers in a Bungeecord network.  
 Using commands the servers can be started/stopped/restarted.
 Also commands can be executed on the Minecraft servers using rcon.
 
