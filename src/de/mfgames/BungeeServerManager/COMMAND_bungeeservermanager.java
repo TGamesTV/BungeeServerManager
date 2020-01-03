@@ -17,6 +17,7 @@ import net.kronos.rkon.core.Rcon;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.config.Configuration;
 
 public class COMMAND_bungeeservermanager extends Command {
 	public COMMAND_bungeeservermanager(String name) {
@@ -66,6 +67,12 @@ public class COMMAND_bungeeservermanager extends Command {
 				break;
 			case "reload":
 				reloadPlugin(sender);
+				break;
+			case "add":
+				addServer(sender, args);
+				break;
+			case "remove":
+				removeServer(sender, args);
 				break;
 			}
 			
@@ -117,6 +124,8 @@ public class COMMAND_bungeeservermanager extends Command {
 		sender.sendMessage(new TextComponent("§6/bsa stop <SERVER>§r - Stop the given server"));
 		sender.sendMessage(new TextComponent("§6/bsa restart <SERVER>§r - Restart the given server"));
 		sender.sendMessage(new TextComponent("§6/bsa reload§r - Reloads the plugin/configuration"));
+		sender.sendMessage(new TextComponent("§6/bsa add <name> <addr> <rconport> <passwd> <dir> <script> <active> <always-stop> §r - Add server"));
+		sender.sendMessage(new TextComponent("§6/bsa remove <name> <repeat name>§r - Remove the server"));
 	}
 	
 	/*
@@ -248,5 +257,63 @@ public class COMMAND_bungeeservermanager extends Command {
 	private void reloadPlugin(CommandSender sender) {
 		BungeeServerManager.getInstance().loadConfiguration();
 		sender.sendMessage(new TextComponent("§aConfiguration reloaded"));
+	}
+	
+	/*
+	 * addServer adds the given server to the configuration
+	 * Syntax: /bsa add <name> <addr> <rconport> <passwd> <dir> <script> <active> <always-stop>
+	 */
+	private void addServer(CommandSender sender, String[] args) {
+		if (args.length != 9) {
+			showHelp(sender);
+			return;
+		}
+		
+		String serverName = args[1];
+		String serverAddr = args[2];
+		int rconport = Integer.parseInt(args[3]);
+		String serverPw = args[4];
+		String serverDir = args[5];
+		String serverScript = args[6];
+		boolean serverActive = args[7].equalsIgnoreCase("true") ? true : false;
+		boolean serverAlwStop = args[8].equalsIgnoreCase("true") ? true : false;
+		
+		
+		Configuration config = BungeeServerManager.getInstance().getConfiguration();
+
+		config.set("servers." + serverName + ".addr", serverAddr);
+		config.set("servers." + serverName + ".port", rconport);
+		config.set("servers." + serverName + ".password", serverPw);
+		config.set("servers." + serverName + ".serverdir", serverDir);
+		config.set("servers." + serverName + ".startscript", serverScript);
+		config.set("servers." + serverName + ".active", serverActive);
+		config.set("servers." + serverName + ".always-stop", serverAlwStop);
+		
+		BungeeServerManager.getInstance().saveConfiguration();
+	}
+
+	/*
+	 * removeServer removes the given server from the configuration
+	 * Syntax: /bsa remove <name>
+	 */
+	private void removeServer(CommandSender sender, String[] args) {
+		if (args.length != 3) {
+			showHelp(sender);
+			return;
+		}
+		
+		String serverName = args[1];
+		String nameRepeat = args[2];
+		
+		if (!serverName.equals(nameRepeat)) {
+			sender.sendMessage(new TextComponent("§c\"" + serverName + "\" doesn't equal \"" + nameRepeat + "\"!"));
+			return;
+		}
+
+		Configuration config = BungeeServerManager.getInstance().getConfiguration();
+		
+		config.set("servers." + serverName, null);
+		
+		BungeeServerManager.getInstance().saveConfiguration();
 	}
 }
