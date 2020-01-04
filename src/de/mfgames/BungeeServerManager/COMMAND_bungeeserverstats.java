@@ -61,7 +61,7 @@ public class COMMAND_bungeeserverstats extends Command {
 			}
 			return;
 		}
-		end:
+
 		sender.sendMessage(new TextComponent("§aTo execute system command: /bss cmd <command>"));
 	}
 
