@@ -41,10 +41,7 @@ public class COMMAND_bungeeservermanager extends Command {
 					return;
 				}
 			}
-		}
-		
-		/* Check sub-command */
-		if (args.length > 0) {
+
 			switch(args[0].toLowerCase()) {
 			default:
 			case "help":
@@ -185,40 +182,56 @@ public class COMMAND_bungeeservermanager extends Command {
 	}
 	
 	public static void startServer(CommandSender sender, String servername) {
-		String startScript = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".startscript");
-		String serverDir = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".serverdir");
-		try {
-			ProcessBuilder pb = new ProcessBuilder(startScript);
-			pb.directory(new File(serverDir));
-			pb.start();
-			if (sender != null) {
-				sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: Starting..."));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			if (sender != null) {
-				sender.sendMessage(new TextComponent("§cAn error occured!"));
+		for (String server : BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys()) {
+			if (server.equals(servername)) {
+				String startScript = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".startscript");
+				String serverDir = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".serverdir");
+				try {
+					ProcessBuilder pb = new ProcessBuilder(startScript);
+					pb.directory(new File(serverDir));
+					pb.start();
+					if (sender != null) {
+						sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: Starting..."));
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+					sender.sendMessage(new TextComponent("§cCould not start §6" + servername + "§c!"));
+				}
+				return;
+			} else if (server.equalsIgnoreCase(servername)) {
+				sender.sendMessage(new TextComponent("§cServer §6" + servername + "§c not found! Did you mean §6" + server + "§c?"));
+				return;
 			}
 		}
+		
+		sender.sendMessage(new TextComponent("§cServer " + servername + " not found! Type §6/bsa list §cfor a list of servers."));
 	}
 	
 	public static void stopServer(CommandSender sender, String servername) {
-		String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".addr");
-		int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + servername + ".port");
-		String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".password");
-		try {
-			Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
-			String result = rcon.command("stop");
-			if (sender != null) {
-				sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: " + result + " (Stopping...)"));
-			}
-			rcon.disconnect();
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (sender != null) {
-				sender.sendMessage(new TextComponent("§cAn error occured!"));
+		for (String server : BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys()) {
+			if (server.equals(servername)) {
+				String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".addr");
+				int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + servername + ".port");
+				String serverPassword = BungeeServerManager.getInstance().getConfiguration().getString("servers." + servername + ".password");
+				try {
+					Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
+					String result = rcon.command("stop");
+					if (sender != null) {
+						sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: " + result + " (Stopping...)"));
+					}
+					rcon.disconnect();
+				} catch (Exception e) {
+					e.printStackTrace();
+					sender.sendMessage(new TextComponent("§cCould not stop §6" + servername + "§c!"));
+				}
+				return;
+			} else if (server.equalsIgnoreCase(servername)) {
+				sender.sendMessage(new TextComponent("§cServer §6" + servername + "§c not found! Did you mean §6" + server + "§c?"));
+				return;
 			}
 		}
+
+		sender.sendMessage(new TextComponent("§cServer " + servername + " not found! Type §6/bsa list §cfor a list of servers."));
 	}
 	
 	/*
