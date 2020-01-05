@@ -43,22 +43,33 @@ public class COMMAND_bungeeserverstats extends Command {
 			// don't return: Show info
 		} else if (args.length == 2 && args[0].equalsIgnoreCase("cmd")) {	// Execute command on system console
 			String command = args[1];
-			String commandPerm = BungeeServerManager.getInstance().getConfiguration().getString("system-commands." + command + ".permission");
 			
-			if(!sender.hasPermission(commandPerm)) {
-				sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
-				return;
+			for (String cmd : BungeeServerManager.getInstance().getConfiguration().getSection("system-commands").getKeys()) {
+				if (cmd.equals(command)) {	// Command was found
+					String commandPerm = BungeeServerManager.getInstance().getConfiguration().getString("system-commands." + command + ".permission");
+					
+					if(!sender.hasPermission(commandPerm)) {
+						sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+						return;
+					}
+					
+					String commandExec = BungeeServerManager.getInstance().getConfiguration().getString("system-commands." + command + ".execute");
+					try {
+						ProcessBuilder pb = new ProcessBuilder(commandExec);
+						pb.start();
+					} catch (IOException e) {
+						e.printStackTrace();
+						sender.sendMessage(new TextComponent("§cAn error occured!"));
+					}
+					return;
+				} else if (cmd.equalsIgnoreCase(command)) {	// Similar command was found
+					sender.sendMessage(new TextComponent("§cCommand §6" + command + "§c not found! Did you mean §6" + cmd + "§c?"));
+					return;
+				}
 			}
+
+			sender.sendMessage(new TextComponent("§cCommand §6" + command + "§c not found!"));
 			
-			String commandExec = BungeeServerManager.getInstance().getConfiguration().getString("system-commands." + command + ".execute");
-			
-			try {
-				ProcessBuilder pb = new ProcessBuilder(commandExec);
-				pb.start();
-			} catch (IOException e) {
-				e.printStackTrace();
-				sender.sendMessage(new TextComponent("§cAn error occured!"));
-			}
 			return;
 		}
 

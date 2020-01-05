@@ -60,7 +60,11 @@ public class COMMAND_bungeeservermanager extends Command {
 				break;
 			case "list":
 				if(args.length > 1) {
-					listServers(sender, Integer.parseInt(args[1]));
+					try {
+						listServers(sender, Integer.parseInt(args[1]));
+					} catch (NumberFormatException e) {
+						sender.sendMessage(new TextComponent("§cPage must be a number!"));
+					}
 				} else {
 					listServers(sender, 1);
 				}
@@ -223,7 +227,19 @@ public class COMMAND_bungeeservermanager extends Command {
 	private void listServers(CommandSender sender, int page) {
 		Collection<String> servers = BungeeServerManager.getInstance().getConfiguration().getSection("servers").getKeys();
 		
+		
 		int pages = (servers.size() - 1) / 8 + 1;
+		
+		if (page > pages) {
+			sender.sendMessage(new TextComponent("§cThere are §6" + pages + "§c pages. You want page §6" + page + "§c!"));
+			return;
+		}
+		
+		if (page < 1) {
+			sender.sendMessage(new TextComponent("§cSorry. There is no page before page 1!"));
+			return;
+		}
+		
 		sender.sendMessage(new TextComponent("§6 ==== SERVERS - PAGE " + page + "/" + pages + " ===="));
 		
 
@@ -274,7 +290,13 @@ public class COMMAND_bungeeservermanager extends Command {
 		
 		String serverName = args[1];
 		String serverAddr = args[2];
-		int rconport = Integer.parseInt(args[3]);
+		int rconport = 0;
+		try {
+			rconport = Integer.parseInt(args[3]);
+		} catch (NumberFormatException e) {
+			sender.sendMessage(new TextComponent("§cRcon port must be a number!"));
+			return;
+		}
 		String serverPw = args[4];
 		String serverDir = args[5];
 		String serverScript = args[6];
