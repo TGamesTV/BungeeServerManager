@@ -35,11 +35,11 @@ public class COMMAND_bungeeservermanager extends Command {
 				if (args.length >= 2) {
 					if (!sender.hasPermission("bungeeserveradmin." + args[0].toLowerCase() + "." + args[1].toLowerCase())
 							&& !sender.hasPermission("bungeeserveradmin." + args[0].toLowerCase() + ".*")) {
-						sender.sendMessage(new TextComponent("�cYou do not have the permissions to execute this command!"));
+						sender.sendMessage(new TextComponent("ï¿½cYou do not have the permissions to execute this command!"));
 						return;
 					}
 				} else {
-					sender.sendMessage(new TextComponent("�cYou do not have the permissions to execute this command!"));
+					sender.sendMessage(new TextComponent("ï¿½cYou do not have the permissions to execute this command!"));
 					return;
 				}
 			}
@@ -62,7 +62,7 @@ public class COMMAND_bungeeservermanager extends Command {
 					try {
 						listServers(sender, Integer.parseInt(args[1]));
 					} catch (NumberFormatException e) {
-						sender.sendMessage(new TextComponent("�cPage must be a number!"));
+						sender.sendMessage(new TextComponent("ï¿½cPage must be a number!"));
 					}
 				} else {
 					listServers(sender, 1);
@@ -119,16 +119,16 @@ public class COMMAND_bungeeservermanager extends Command {
 	 * Shows help
 	 * */
 	private void showHelp(CommandSender sender) {
-		sender.sendMessage(new TextComponent("�6�l ==== BUNGEE SERVER ADMIN " + BungeeServerManager.pver + " ==== "));
-		sender.sendMessage(new TextComponent("�6/bsa help�r - Shows this"));
-		sender.sendMessage(new TextComponent("�6/bsa list - Lists all servers"));
-		sender.sendMessage(new TextComponent("�6/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]�r - Execute command"));
-		sender.sendMessage(new TextComponent("�6/bsa start <SERVER>�r - Start the given server"));
-		sender.sendMessage(new TextComponent("�6/bsa stop <SERVER>�r - Stop the given server"));
-		sender.sendMessage(new TextComponent("�6/bsa restart <SERVER>�r - Restart the given server"));
-		sender.sendMessage(new TextComponent("�6/bsa reload�r - Reloads the plugin/configuration"));
-		sender.sendMessage(new TextComponent("�6/bsa add <name> <addr> <rconport> <passwd> <dir> <script> <active> <always-stop> �r - Add server"));
-		sender.sendMessage(new TextComponent("�6/bsa remove <name> <repeat name>�r - Remove the server"));
+		sender.sendMessage(new TextComponent("ï¿½6ï¿½l ==== BUNGEE SERVER ADMIN " + BungeeServerManager.pver + " ==== "));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa helpï¿½r - Shows this"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa list - Lists all servers"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]ï¿½r - Execute command"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa start <SERVER>ï¿½r - Start the given server"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa stop <SERVER>ï¿½r - Stop the given server"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa restart <SERVER>ï¿½r - Restart the given server"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa reloadï¿½r - Reloads the plugin/configuration"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa add <name> <addr> <rconport> <passwd> <dir> <script> <active> <always-stop> ï¿½r - Add server"));
+		sender.sendMessage(new TextComponent("ï¿½6/bsa remove <name> <repeat name>ï¿½r - Remove the server"));
 	}
 	
 	/*
@@ -147,14 +147,14 @@ public class COMMAND_bungeeservermanager extends Command {
 					command += " " + args[i];
 				}
 				String result = rcon.command(command);
-				sender.sendMessage(new TextComponent("�6Server �a" + args[1] + "�6: " + result));
+				sender.sendMessage(new TextComponent("ï¿½6Server ï¿½a" + args[1] + "ï¿½6: " + result));
 				rcon.disconnect();
 			} catch (Exception e) {
 				e.printStackTrace();
-				sender.sendMessage(new TextComponent("�cAn error occured!"));
+				sender.sendMessage(new TextComponent("ï¿½cAn error occured!"));
 			}
 		} else {
-			sender.sendMessage(new TextComponent("�c/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
+			sender.sendMessage(new TextComponent("ï¿½c/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
 			showHelp(sender);
 		}
 	}
@@ -177,7 +177,7 @@ public class COMMAND_bungeeservermanager extends Command {
 				stopServer(sender, args[1]);
 				break;
 			default:
-				sender.sendMessage(new TextComponent("�c/bsa <start/stop/restart> <SERVER>"));
+				sender.sendMessage(new TextComponent("ï¿½c/bsa <start/stop/restart> <SERVER>"));
 				showHelp(sender);
 			}
 		}
@@ -193,20 +193,20 @@ public class COMMAND_bungeeservermanager extends Command {
 					pb.directory(new File(serverDir));
 					pb.start();
 					if (sender != null) {
-						sender.sendMessage(new TextComponent("�6Server �a" + servername + "�6: Starting..."));
+						sender.sendMessage(new TextComponent("ï¿½6Server ï¿½a" + servername + "ï¿½6: Starting..."));
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
-					sender.sendMessage(new TextComponent("�cCould not start �6" + servername + "�c!"));
+					sender.sendMessage(new TextComponent("ï¿½cCould not start ï¿½6" + servername + "ï¿½c!"));
 				}
 				return;
 			} else if (server.equalsIgnoreCase(servername)) {
-				sender.sendMessage(new TextComponent("�cServer �6" + servername + "�c not found! Did you mean �6" + server + "�c?"));
+				sender.sendMessage(new TextComponent("ï¿½cServer ï¿½6" + servername + "ï¿½c not found! Did you mean ï¿½6" + server + "ï¿½c?"));
 				return;
 			}
 		}
 		
-		sender.sendMessage(new TextComponent("�cServer " + servername + " not found! Type �6/bsa list �cfor a list of servers."));
+		sender.sendMessage(new TextComponent("ï¿½cServer " + servername + " not found! Type ï¿½6/bsa list ï¿½cfor a list of servers."));
 	}
 	
 	public static void stopServer(CommandSender sender, String servername) {
@@ -219,21 +219,21 @@ public class COMMAND_bungeeservermanager extends Command {
 					Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
 					String result = rcon.command("stop");
 					if (sender != null) {
-						sender.sendMessage(new TextComponent("�6Server �a" + servername + "�6: " + result + " (Stopping...)"));
+						sender.sendMessage(new TextComponent("ï¿½6Server ï¿½a" + servername + "ï¿½6: " + result + " (Stopping...)"));
 					}
 					rcon.disconnect();
 				} catch (Exception e) {
 					e.printStackTrace();
-					sender.sendMessage(new TextComponent("�cCould not stop �6" + servername + "�c!"));
+					sender.sendMessage(new TextComponent("ï¿½cCould not stop ï¿½6" + servername + "ï¿½c!"));
 				}
 				return;
 			} else if (server.equalsIgnoreCase(servername)) {
-				sender.sendMessage(new TextComponent("�cServer �6" + servername + "�c not found! Did you mean �6" + server + "�c?"));
+				sender.sendMessage(new TextComponent("ï¿½cServer ï¿½6" + servername + "ï¿½c not found! Did you mean ï¿½6" + server + "ï¿½c?"));
 				return;
 			}
 		}
 
-		sender.sendMessage(new TextComponent("�cServer " + servername + " not found! Type �6/bsa list �cfor a list of servers."));
+		sender.sendMessage(new TextComponent("ï¿½cServer " + servername + " not found! Type ï¿½6/bsa list ï¿½cfor a list of servers."));
 	}
 	
 	/*
@@ -246,12 +246,12 @@ public class COMMAND_bungeeservermanager extends Command {
 		int pages = (servers.size() - 1) / 8 + 1;
 		
 		if (page > pages) {
-			sender.sendMessage(new TextComponent("�cThere are �6" + pages + "�c pages. You want page �6" + page + "�c!"));
+			sender.sendMessage(new TextComponent("ï¿½cThere are ï¿½6" + pages + "ï¿½c pages. You want page ï¿½6" + page + "ï¿½c!"));
 			return;
 		}
 		
 		if (page < 1) {
-			sender.sendMessage(new TextComponent("�cSorry. There is no page before page 1!"));
+			sender.sendMessage(new TextComponent("ï¿½cSorry. There is no page before page 1!"));
 			return;
 		}
 
@@ -259,8 +259,7 @@ public class COMMAND_bungeeservermanager extends Command {
 		String a[] = new String[servers.size()];
 		a = servers.toArray(a);
 
-		HashMap<String, Boolean> states = new HashMap<>();
-		ArrayList<String> listedServers = new ArrayList<>();
+		ArrayList<String> listedServers = new ArrayList<>();	/* All servers to list */
 
 		for (int i = (page - 1) * 8; i < page * 8; i++) {
 			if (i == a.length) {
@@ -270,25 +269,16 @@ public class COMMAND_bungeeservermanager extends Command {
 			String s = a[i];
 			listedServers.add(s);
 			
+		}
+
+		HashMap<String, Boolean> states = new HashMap<>();	/* Name, State*/
+		
+		for (String s : listedServers) {
 			String serverAddress = BungeeServerManager.getInstance().getConfiguration().getString("servers." + s + ".addr");
 			int serverPort = BungeeServerManager.getInstance().getConfiguration().getInt("servers." + s + ".port");
 
-			new ServerState(states, s, serverAddress, serverPort);
+			new ServerState(states, s, serverAddress, serverPort, sender, listedServers, page, pages);
 		}
-
-		while (listedServers.size() > states.size());
-
-		sender.sendMessage(new TextComponent("�6 ==== SERVERS - PAGE " + page + "/" + pages + " ===="));
-
-		for (String s : listedServers) {
-			if (states.get(s)) {
-				sender.sendMessage(new TextComponent("§6" + s + " §r[§aONLINE§r]"));
-			} else {
-				sender.sendMessage(new TextComponent("§6" + s + " §r[§cOFFLINE§r]"));
-			}
-		}
-
-		sender.sendMessage(new TextComponent("�6 ============================"));
 	}
 	
 	/*
@@ -297,7 +287,7 @@ public class COMMAND_bungeeservermanager extends Command {
 	 */
 	private void reloadPlugin(CommandSender sender) {
 		BungeeServerManager.getInstance().loadConfiguration();
-		sender.sendMessage(new TextComponent("�aConfiguration reloaded"));
+		sender.sendMessage(new TextComponent("ï¿½aConfiguration reloaded"));
 	}
 	
 	/*
@@ -316,7 +306,7 @@ public class COMMAND_bungeeservermanager extends Command {
 		try {
 			rconport = Integer.parseInt(args[3]);
 		} catch (NumberFormatException e) {
-			sender.sendMessage(new TextComponent("�cRcon port must be a number!"));
+			sender.sendMessage(new TextComponent("ï¿½cRcon port must be a number!"));
 			return;
 		}
 		String serverPw = args[4];
@@ -353,7 +343,7 @@ public class COMMAND_bungeeservermanager extends Command {
 		String nameRepeat = args[2];
 		
 		if (!serverName.equals(nameRepeat)) {
-			sender.sendMessage(new TextComponent("�c\"" + serverName + "\" doesn't equal \"" + nameRepeat + "\"!"));
+			sender.sendMessage(new TextComponent("ï¿½c\"" + serverName + "\" doesn't equal \"" + nameRepeat + "\"!"));
 			return;
 		}
 
