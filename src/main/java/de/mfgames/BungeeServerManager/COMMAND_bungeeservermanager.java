@@ -35,11 +35,11 @@ public class COMMAND_bungeeservermanager extends Command {
                 if (args.length >= 2) {
                     if (!sender.hasPermission("bungeeserveradmin." + args[0].toLowerCase() + "." + args[1].toLowerCase())
                             && !sender.hasPermission("bungeeserveradmin." + args[0].toLowerCase() + ".*")) {
-                        sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+                        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(1, "§cYou do not have the permissions to execute this command!")));
                         return;
                     }
                 } else {
-                    sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+                    sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(1, "§cYou do not have the permissions to execute this command!")));
                     return;
                 }
             }
@@ -62,7 +62,7 @@ public class COMMAND_bungeeservermanager extends Command {
                         try {
                             listServers(sender, Integer.parseInt(args[1]));
                         } catch (NumberFormatException e) {
-                            sender.sendMessage(new TextComponent("§cPage must be a number!"));
+                            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(3, "§cPage must be a number!")));
                         }
                     } else {
                         listServers(sender, 1);
@@ -120,15 +120,15 @@ public class COMMAND_bungeeservermanager extends Command {
      * */
     private void showHelp(CommandSender sender) {
         sender.sendMessage(new TextComponent("§6§l ==== BUNGEE SERVER ADMIN " + BungeeServerManager.pver + " ==== "));
-        sender.sendMessage(new TextComponent("§6/bsa help§r - Shows this"));
-        sender.sendMessage(new TextComponent("§6/bsa list - Lists all servers"));
-        sender.sendMessage(new TextComponent("§6/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]§r - Execute command"));
-        sender.sendMessage(new TextComponent("§6/bsa start <SERVER>§r - Start the given server"));
-        sender.sendMessage(new TextComponent("§6/bsa stop <SERVER>§r - Stop the given server"));
-        sender.sendMessage(new TextComponent("§6/bsa restart <SERVER>§r - Restart the given server"));
-        sender.sendMessage(new TextComponent("§6/bsa reload§r - Reloads the plugin/configuration"));
-        sender.sendMessage(new TextComponent("§6/bsa add <name> <addr> <rconport> <passwd> <dir> <script> <active> <always-stop> §r - Add server"));
-        sender.sendMessage(new TextComponent("§6/bsa remove <name> <repeat name>§r - Remove the server"));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(4, "§6/bsa help§r - Shows this")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(5, "§6/bsa list - Lists all servers")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(6, "§6/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]§r - Execute command")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(7, "§6/bsa start <SERVER>§r - Start the given server")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(8, "§6/bsa stop <SERVER>§r - Stop the given server")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(9, "§6/bsa restart <SERVER>§r - Restart the given server")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(10, "§6/bsa reload§r - Reloads the plugin/configuration")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(11, "§6/bsa add <name> <addr> <rconport> <passwd> <dir> <script> <active> <always-stop> §r - Add server")));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(12, "§6/bsa remove <name> <repeat name>§r - Remove the server")));
     }
 
     /*
@@ -151,10 +151,10 @@ public class COMMAND_bungeeservermanager extends Command {
                 rcon.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
-                sender.sendMessage(new TextComponent("§cAn error occured!"));
+                sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(2, "§cAn error occured!")));
             }
         } else {
-            sender.sendMessage(new TextComponent("§c/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]"));
+            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(14, "§c/bsa cmd <SERVER> <COMMAND> [<ARGUMENTS>]")));
             showHelp(sender);
         }
     }
@@ -177,7 +177,7 @@ public class COMMAND_bungeeservermanager extends Command {
                     stopServer(sender, args[1]);
                     break;
                 default:
-                    sender.sendMessage(new TextComponent("§c/bsa <start/stop/restart> <SERVER>"));
+                    sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(15, "§c/bsa <start/stop/restart> <SERVER>")));
                     showHelp(sender);
             }
         }
@@ -193,20 +193,20 @@ public class COMMAND_bungeeservermanager extends Command {
                     pb.directory(new File(serverDir));
                     pb.start();
                     if (sender != null) {
-                        sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: Starting..."));
+                        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(17, "§6Server §a%1§6: Starting..." , servername)));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    sender.sendMessage(new TextComponent("§cCould not start §6" + servername + "§c!"));
+                    sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(18, "§cCould not start §6%1§c!" , servername)));
                 }
                 return;
             } else if (server.equalsIgnoreCase(servername)) {
-                sender.sendMessage(new TextComponent("§cServer §6" + servername + "§c not found! Did you mean §6" + server + "§c?"));
+                sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(16, "§cServer §6%1§c not found! Did you mean §6%2§c?", servername, server)));
                 return;
             }
         }
 
-        sender.sendMessage(new TextComponent("§cServer " + servername + " not found! Type §6/bsa list §cfor a list of servers."));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(19, "§cServer %1 not found! Type §6/bsa list §cfor a list of servers.", servername)));
     }
 
     public static void stopServer(CommandSender sender, String servername) {
@@ -219,21 +219,21 @@ public class COMMAND_bungeeservermanager extends Command {
                     Rcon rcon = new Rcon(serverAddress, serverPort, serverPassword.getBytes());
                     String result = rcon.command("stop");
                     if (sender != null) {
-                        sender.sendMessage(new TextComponent("§6Server §a" + servername + "§6: " + result + " (Stopping...)"));
+                        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(20, "§6Server §a%1§6: %2 (Stopping...)", servername, result)));
                     }
                     rcon.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    sender.sendMessage(new TextComponent("§cCould not stop §6" + servername + "§c!"));
+                    sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(21, "§cCould not stop §6%1§c!", servername)));
                 }
                 return;
             } else if (server.equalsIgnoreCase(servername)) {
-                sender.sendMessage(new TextComponent("§cServer §6" + servername + "§c not found! Did you mean §6" + server + "§c?"));
+                sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(16, "§cServer §6%1§c not found! Did you mean §6%2§c?", servername, server)));
                 return;
             }
         }
 
-        sender.sendMessage(new TextComponent("§cServer " + servername + " not found! Type §6/bsa list §cfor a list of servers."));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(19, "§cServer %1 not found! Type §6/bsa list §cfor a list of servers.", servername)));
     }
 
     /*
@@ -246,12 +246,12 @@ public class COMMAND_bungeeservermanager extends Command {
         int pages = (servers.size() - 1) / 8 + 1;
 
         if (page > pages) {
-            sender.sendMessage(new TextComponent("§cThere are §6" + pages + "§c pages. You want page §6" + page + "§c!"));
+            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(22, "§cThere are §6%1§c pages. You want page §6%2§c!", pages, page)));
             return;
         }
 
         if (page < 1) {
-            sender.sendMessage(new TextComponent("§cSorry. There is no page before page 1!"));
+            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(23, "§cSorry. There is no page before page 1!")));
             return;
         }
 
@@ -287,7 +287,7 @@ public class COMMAND_bungeeservermanager extends Command {
      */
     private void reloadPlugin(CommandSender sender) {
         BungeeServerManager.getInstance().loadConfiguration();
-        sender.sendMessage(new TextComponent("§aConfiguration reloaded"));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(24, "§aConfiguration reloaded")));
     }
 
     /*
@@ -306,7 +306,7 @@ public class COMMAND_bungeeservermanager extends Command {
         try {
             rconport = Integer.parseInt(args[3]);
         } catch (NumberFormatException e) {
-            sender.sendMessage(new TextComponent("§cRcon port must be a number!"));
+            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(25, "§cRcon port must be a number!")));
             return;
         }
         String serverPw = args[4];
@@ -343,7 +343,7 @@ public class COMMAND_bungeeservermanager extends Command {
         String nameRepeat = args[2];
 
         if (!serverName.equals(nameRepeat)) {
-            sender.sendMessage(new TextComponent("§c\"" + serverName + "\" doesn't equal \"" + nameRepeat + "\"!"));
+            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(26, "§c\"%1\" doesn't equal \"%2\"!", serverName, nameRepeat)));
             return;
         }
 

@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.concurrent.Callable;
 
 import de.mfgames.BungeeServerManager.Metrics;
+import de.mfgames.SimpleTranslator.SimpleTranslator;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -40,10 +41,12 @@ public class BungeeServerManager extends Plugin {
     }
 
 
-    public static String pver = "1.7.2";	/* Plugin Version */
+    public static String pver = "1.8";	/* Plugin Version */
     public static String pname = "BungeeServerAdmin";	/* Plugin Name */
 
     Configuration configuration;
+
+    public SimpleTranslator translator;
 
     @Override
     public void onEnable() {
@@ -58,6 +61,8 @@ public class BungeeServerManager extends Plugin {
                 COMMAND_bungeeservermanager.startServer(null, s);
             }
         }
+
+        translator = new SimpleTranslator(getConfiguration().getString("language"), getInstance());
 
         /* bStats */
         if (getConfiguration().getBoolean("bstats-enable", true)) {
@@ -123,7 +128,6 @@ public class BungeeServerManager extends Plugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /*

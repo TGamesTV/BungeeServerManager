@@ -1,4 +1,5 @@
 bstats-enable: true
+language: en
 servers:
   server1:
     addr: 192.168.2.101

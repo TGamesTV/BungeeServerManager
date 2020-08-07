@@ -29,6 +29,7 @@ For **/bss cmd** the permissions need to be defined in the configuration.
 ### Example configuration
 ```YAML
 bstats-enable: true
+language: en
 servers:
   server1:
     addr: 192.168.2.101
@@ -47,6 +48,7 @@ system-commands:
 Parameter|Explaination
 ----------|----------
 bstats-enable|should the plugin use bStats?
+language|Language. A translations file is needed.
 addr|address of the server
 port|rcon Port
 password|rcon password

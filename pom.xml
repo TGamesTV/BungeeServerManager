@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>BungeeServerAdmin</artifactId>
-    <version>1.7.2-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
 
     <repositories>
         <repository>

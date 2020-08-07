@@ -29,7 +29,7 @@ public class COMMAND_bungeeserverstats extends Command {
         if (args.length == 0) {	// Show system stats
             /* Check if sender has the permissions (print message and return if not) */
             if (!sender.hasPermission("bungeeserveradmin.stats") && !sender.hasPermission("bungeeserveradmin.*")) {
-                sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+                sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(1, "§cYou do not have the permissions to execute this command!")));
                 return;
             }
 
@@ -49,7 +49,7 @@ public class COMMAND_bungeeserverstats extends Command {
                     String commandPerm = BungeeServerManager.getInstance().getConfiguration().getString("system-commands." + command + ".permission");
 
                     if(!sender.hasPermission(commandPerm)) {
-                        sender.sendMessage(new TextComponent("§cYou do not have the permissions to execute this command!"));
+                        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(1, "§cYou do not have the permissions to execute this command!")));
                         return;
                     }
 
@@ -59,21 +59,21 @@ public class COMMAND_bungeeserverstats extends Command {
                         pb.start();
                     } catch (IOException e) {
                         e.printStackTrace();
-                        sender.sendMessage(new TextComponent("§cAn error occured!"));
+                        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(2, "§cAn error occured!")));
                     }
                     return;
                 } else if (cmd.equalsIgnoreCase(command)) {	// Similar command was found
-                    sender.sendMessage(new TextComponent("§cCommand §6" + command + "§c not found! Did you mean §6" + cmd + "§c?"));
+                    sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(27, "§cCommand §6%1§c not found! Did you mean §6%2§c?", command, cmd)));
                     return;
                 }
             }
 
-            sender.sendMessage(new TextComponent("§cCommand §6" + command + "§c not found!"));
+            sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(28, "§cCommand §6%1§c not found!", command)));
 
             return;
         }
 
-        sender.sendMessage(new TextComponent("§aTo execute system command: /bss cmd <command>"));
+        sender.sendMessage(new TextComponent(BungeeServerManager.getInstance().translator.translateString(29, "§aTo execute system command: /bss cmd <command>")));
     }
 
 }

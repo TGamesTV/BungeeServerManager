@@ -46,17 +46,17 @@ public class ServerState {
                 servers.put(name, open);	/* Add server state to HashMap */
 
                 if (servers.size() >= listedServers.size()) {	/* All servers checked? */
-                    sender.sendMessage(new TextComponent("ï¿½6 ==== SERVERS - PAGE " + page + "/" + pages + " ===="));
+                    sender.sendMessage(new TextComponent("§6 ==== SERVERS - PAGE " + page + "/" + pages + " ===="));
 
                     for (String s : listedServers) {
                         if (servers.get(s)) {
-                            sender.sendMessage(new TextComponent("Â§6" + s + " Â§r[Â§aONLINEÂ§r]"));
+                            sender.sendMessage(new TextComponent("§6" + s + " §r[§aONLINE§r]"));
                         } else {
-                            sender.sendMessage(new TextComponent("Â§6" + s + " Â§r[Â§cOFFLINEÂ§r]"));
+                            sender.sendMessage(new TextComponent("§6" + s + " §r[§cOFFLINE§r]"));
                         }
                     }
 
-                    sender.sendMessage(new TextComponent("ï¿½6 ============================"));
+                    sender.sendMessage(new TextComponent("§6 ============================"));
                 }
             }
         }).start();
