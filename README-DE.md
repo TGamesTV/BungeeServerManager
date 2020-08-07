@@ -28,6 +28,7 @@ Für **/bss cmd** müssen die Befehle in der Config definiert werden.
 ## Konfiguration
 ### Beispiel Konfiguration
 ```YAML
+language: en
 bstats-enable: true
 servers:
   server1:
@@ -46,6 +47,7 @@ system-commands:
 
 Parameter|Erklärung
 ----------|----------
+language|Sprache des Plugins/der Befehle. Öffne den Plugin Konfigurations Ordner, Duplizierte die Datei `i18n_en.yml` im Ordner `i18n`, nenn die Datei entsprechend um (e.g. `i18n_de.yml`) und übersetze den Inhalt der Datei.
 bstats-enable|Soll das Plugin bStats verwenden?
 addr|Adresse des Servers
 port|rcon Port

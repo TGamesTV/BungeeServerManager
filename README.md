@@ -28,6 +28,7 @@ For **/bss cmd** the permissions need to be defined in the configuration.
 ## Configuration
 ### Example configuration
 ```YAML
+language: en
 bstats-enable: true
 language: en
 servers:
@@ -47,6 +48,7 @@ system-commands:
 
 Parameter|Explaination
 ----------|----------
+language|language of the plugin/commands. Go to the plugin's folder, duplicate the `i18n_en.yml` file in the `i18n` folder, rename it according to your language (e.g. `i18n_de.yml`) and translate the contens of the file.
 bstats-enable|should the plugin use bStats?
 language|Language. A translations file is needed.
 addr|address of the server
