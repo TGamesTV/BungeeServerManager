@@ -37,7 +37,7 @@ servers:
     port: 27015
     password: secure
     serverdir: ..\Server1\
-    startscript: start.bat
+    startscript: .\start.bat
     active: true
     always-stop: false
 system-commands:
@@ -55,7 +55,7 @@ addr|address of the server
 port|rcon Port
 password|rcon password
 serverdir|path to the server
-startscript|name of the startscript (add **./** on Linux, eg. `./start.sh`)
+startscript|name of the startscript (add **./** on Linux and **.\\** on Windows, eg. `./start.sh`)
 active|should the server be started when the plugin is loaded? (Defaults to false)
 always-stop|also stopps the server if it has not been started by bsa (Defaults to false)
 execute|command to be executed on the system

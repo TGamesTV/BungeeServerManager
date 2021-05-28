@@ -6,7 +6,7 @@ servers:
     port: 27015
     password: secure
     serverdir: ..\Server1\
-    startscript: start.bat
+    startscript: .\start.bat
     active: true
     always-stop: false
   server2:
@@ -14,7 +14,7 @@ servers:
     port: 27015
     password: onetwothree
     serverdir: ..\Server2\
-    startscript: start.bat
+    startscript: .\start.bat
     active: true
     always-stop: false
 system-commands:
