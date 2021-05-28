@@ -59,7 +59,7 @@ always-stop|Stoppt den Server auch dann, wenn er nicht von BSA gestartet wurde (
 execute|Befehl, der auf dem System ausgeführt werden soll
 permission|Berechtigung für den Befehl
 
-Es können beliebig viele Server/Befehle angegeben werden.
+Es können beliebig viele Server/Befehle angegeben werden. Füge `#!/bin/bash` an den Anfang jedes Start-Scriptes, falls dies nicht bereits geschehen ist.
 
 ## Installation
 1. BungeeServerAdmin-\*.jar Datei in den Plugins Ordner von Bungeecord schieben

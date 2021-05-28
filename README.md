@@ -62,7 +62,7 @@ execute|command to be executed on the system
 permission|permission for the command
 
 
-As many servers/commands can be created as needed.
+As many servers/commands can be created as needed. Add `#!/bin/bash` at the beginning of each start script if you haven't already.
 
 ## Installation
 1. Copy the BungeeServerAdmin-\*.jar file to the plugins folder of Bungeecord
